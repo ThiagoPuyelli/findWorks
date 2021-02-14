@@ -14,8 +14,13 @@ export var register = async (req: Request, res: Response) => {
                 newUser[i] = req.body[i];
             }
         }
+
+        if(req.file){
+            newUser.image = req.file.filename;
+        }
+
         if(newUser){
-            const user = await User.save(newUser);
+            const user = await newUser.save();
 
             if(user){
                 const jwtPassword: any = process.env.JWT_PASSWORD

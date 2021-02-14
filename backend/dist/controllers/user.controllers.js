@@ -28,8 +28,11 @@ var register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 newUser[i] = req.body[i];
             }
         }
+        if (req.file) {
+            newUser.image = req.file.filename;
+        }
         if (newUser) {
-            const user = yield User_models_1.default.save(newUser);
+            const user = yield newUser.save();
             if (user) {
                 const jwtPassword = process.env.JWT_PASSWORD;
                 const token = jsonwebtoken_1.default.sign({ id: user.id }, jwtPassword, {
