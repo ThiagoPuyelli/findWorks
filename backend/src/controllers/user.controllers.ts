@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import jwt, { verify } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import User from "../models/User.models";
 import encyp from "../methods/encryptPassword.methods";
 import comp from "../methods/comparePassword.methods";
