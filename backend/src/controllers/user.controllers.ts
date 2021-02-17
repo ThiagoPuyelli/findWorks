@@ -31,21 +31,25 @@ export var register = async (req: Request, res: Response) => {
                     expiresIn: 60 * 60 * 24
                 });
                 res.json({
+                    auth: true,
                     token: "0|" + token + "|" + user.id
                 });
             } else {
                 res.json({
+                    auth: false,
                     error: "Error al registrar usuario"
                 });
             }
 
         } else {
             res.json({
+                auth: false,
                 error: "Los datos del usuario no son válidos"
             });
         }
     } else {
         res.json({
+            auth: false,
             error: "El email ya existe"
         });
     }
@@ -66,15 +70,18 @@ export var login = async (req: Request, res: Response) => {
             });
 
             res.json({
+                auth: true,
                 token: "0|" + token + "|" + user._id
             });
         } else {
             res.json({
+                auth: false,
                 error: "La contraseña no es válida"
             });
         }
     } else {
         res.json({
+            auth: false,
             error: "El email no es válido"
         });
     }
@@ -106,7 +113,13 @@ export var getUser = async (req: Request, res: Response) => {
 }
 
 export var deleteUser = async (req: Request, res: Response) => {
-    const userDelete = await User.findByIdAndRemove(req.params.id);
+    var userDelete
+    if(req.params.id){
+        userDelete = await User.findByIdAndRemove(req.params.id);
+    } else {
+        const userID: any = req.headers["x-access-token"];
+        userDelete = await User.findByIdAndRemove(userID.split("|")[1]);
+    }
 
     if(userDelete){
         await fs.unlinkSync(path.join(__dirname + "/../uploads/" + userDelete.image));
@@ -122,7 +135,14 @@ export var deleteUser = async (req: Request, res: Response) => {
 }
 
 export var updateUser = async (req: Request, res: Response) => {
-    const userToUpdate = await User.findById(req.params.id);
+    var userToUpdate;
+    if(req.params.id){
+        userToUpdate = await User.findByIdAndRemove(req.params.id);
+    } else {
+        const userID: any = req.headers["x-access-token"];
+        userToUpdate = await User.findByIdAndRemove(userID.split("|")[1]);
+    }
+
 
     if(userToUpdate){
         console.log(req.body)

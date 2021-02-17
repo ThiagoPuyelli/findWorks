@@ -1,8 +1,9 @@
-import { Schema, model } from "mongoose";
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const Admin: Schema = new Schema({
+const Admin = new Schema({
     email: {type: String, required: true},
     password: {type: String, required: true}
 });
 
-export default model("admin", Admin);
+export default mongoose.model("admin", Admin);

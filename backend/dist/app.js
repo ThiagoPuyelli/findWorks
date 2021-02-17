@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const morgan_1 = __importDefault(require("morgan"));
 const express_1 = __importDefault(require("express"));
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
+const admin_routes_1 = __importDefault(require("./routes/admin.routes"));
 exports.default = () => {
     const app = express_1.default();
     // Config
@@ -24,5 +25,6 @@ exports.default = () => {
     });
     // Routes
     app.use(user_routes_1.default);
+    app.use(admin_routes_1.default);
     return app;
 };

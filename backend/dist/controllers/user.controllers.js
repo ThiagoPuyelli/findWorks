@@ -42,23 +42,27 @@ var register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     expiresIn: 60 * 60 * 24
                 });
                 res.json({
+                    auth: true,
                     token: "0|" + token + "|" + user.id
                 });
             }
             else {
                 res.json({
+                    auth: false,
                     error: "Error al registrar usuario"
                 });
             }
         }
         else {
             res.json({
+                auth: false,
                 error: "Los datos del usuario no son válidos"
             });
         }
     }
     else {
         res.json({
+            auth: false,
             error: "El email ya existe"
         });
     }
@@ -75,17 +79,20 @@ var login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 expiresIn: 60 * 60 * 24
             });
             res.json({
+                auth: true,
                 token: "0|" + token + "|" + user._id
             });
         }
         else {
             res.json({
+                auth: false,
                 error: "La contraseña no es válida"
             });
         }
     }
     else {
         res.json({
+            auth: false,
             error: "El email no es válido"
         });
     }
@@ -116,7 +123,14 @@ var getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getUser = getUser;
 var deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const userDelete = yield User_models_1.default.findByIdAndRemove(req.params.id);
+    var userDelete;
+    if (req.params.id) {
+        userDelete = yield User_models_1.default.findByIdAndRemove(req.params.id);
+    }
+    else {
+        const userID = req.headers["x-access-token"];
+        userDelete = yield User_models_1.default.findByIdAndRemove(userID.split("|")[1]);
+    }
     if (userDelete) {
         yield fs_1.default.unlinkSync(path_1.default.join(__dirname + "/../uploads/" + userDelete.image));
         res.json({
@@ -131,7 +145,14 @@ var deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.deleteUser = deleteUser;
 var updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const userToUpdate = yield User_models_1.default.findById(req.params.id);
+    var userToUpdate;
+    if (req.params.id) {
+        userToUpdate = yield User_models_1.default.findByIdAndRemove(req.params.id);
+    }
+    else {
+        const userID = req.headers["x-access-token"];
+        userToUpdate = yield User_models_1.default.findByIdAndRemove(userID.split("|")[1]);
+    }
     if (userToUpdate) {
         console.log(req.body);
         for (let i in req.body) {
