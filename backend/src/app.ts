@@ -3,6 +3,7 @@ import express from "express";
 import { Request, Response, NextFunction } from "express";
 import userRoutes from "./routes/user.routes";
 import adminRoutes from "./routes/admin.routes";
+import workRoutes from "./routes/work.routes";
 
 export default () => {
 
@@ -31,6 +32,7 @@ export default () => {
     
     app.use(userRoutes);
     app.use(adminRoutes);
+    app.use(workRoutes);
 
     return app;
     
