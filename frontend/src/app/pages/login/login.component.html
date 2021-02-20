@@ -1,1 +1,12 @@
-<p>login works!</p>
+<div id="contentLogin">
+    <h1 id="titleLogin">Login</h1>
+    <form (submit)="sendLogin()" [formGroup]="dataForm" id="loginForm">
+        <label>Email</label>
+        <input type="email" name="email" formControlName="email" placeholder=email>
+        <label>Password</label>
+        <input type="password" name=password formControlName=password placeholder="password">
+        <span class="msgError failed">Data is failed</span>
+        <span class="msgError noAuth">User is not exists</span>
+        <button type=submit>Submit</button>
+    </form>
+</div>
