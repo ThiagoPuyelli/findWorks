@@ -1,0 +1,118 @@
+#contentRegister{
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    margin-top: 30px;
+}
+
+#registerForm{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+input,
+textarea{
+    margin-top: 30px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 300px;
+    box-shadow: 0px 0px 4px #ccc;
+    font-size: 18px;
+}
+
+textarea{
+    height: 200px;
+    width: 600px;
+    font-size: 16px;
+}
+
+input[type="file"]{
+    cursor: pointer;
+}
+
+label{
+    display:block;
+    margin-bottom: -20px;
+    margin-top: 10px;
+    width: 320px;
+    text-align: left;
+    border-bottom: 1px solid var(--yellow);
+    padding-bottom: 5px;
+}
+
+#labelDescription{
+    width: 620px !important;
+}
+
+h1{
+    display: block;
+    margin-bottom: 30px;
+    color: var(--black);
+    border-bottom: 2px solid var(--yellow);
+    padding: 5px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+button[type="submit"]{
+    margin-top: 30px;
+    margin-bottom: 40px;
+    padding: 10px;
+    width: 600px;
+    background-color: var(--green);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 300ms all;
+}
+
+button[type="submit"]:hover {
+    background-color: #156156;
+}
+
+.messageError{
+    display: none;
+    margin-bottom: -20px;
+    margin-top: 10px;
+    color: red;
+    text-shadow: 0px 0px 2px red;
+    font-size: 20px;
+}
+
+#contentImage{
+    width: 300px;
+    height: auto;
+    border: 3px solid var(--black);
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 0px;
+}
+
+#contentImage img{
+    width: 100%;
+    margin-bottom: -6px;
+    border-radius: 5px;
+}
+
+#closeImg{
+    display: none;
+    padding: 5px;
+    font-size: 24px;
+    height: 60px;
+    width: 60px;
+    margin-top: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 4px #ccc;
+    cursor: pointer;
+    transition: 300ms all;
+}
+
+#closeImg:hover{
+    color: red;
+    transform: scale(1.2, 1.2); 
+}

@@ -1,0 +1,10 @@
+<header id="headerApp">
+  <h1 id="logo">Find Works</h1>
+  <div class="divLinksHeader" *ngIf="auth">Logueado</div>
+  <div class="divLinksHeader" *ngIf="!auth">
+    <a class="linkHeader" [routerLink]="['/login']">Login</a>
+    <a class="linkHeader" [routerLink]="['/register']">Register</a>
+  </div>
+</header>
+
+<router-outlet></router-outlet>

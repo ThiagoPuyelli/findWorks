@@ -1,0 +1,28 @@
+<div id="contentRegister">
+    <h1>Register</h1>
+    <form id="registerForm" (submit)="submitRegister()" [formGroup]="dataForm">
+        <label>Name</label>
+        <input type="text" formControlName="name" (change)="changeInput($event)" placeholder=name name="name">
+        <span class="messageError errorname">Name is required</span>
+        <label>Lastname</label>
+        <input (change)="changeInput($event)" type="text" formControlName="lastname" placeholder=lastname name=lastname>
+        <span class="messageError errorlastname">Lastname is required</span>
+        <label>Email</label>
+        <input (change)="changeInput($event)" type="email" formControlName="email" placeholder=email name=email>
+        <span class="messageError erroremail">Email is failed</span>
+        <label>Password</label>
+        <input (change)="changeInput($event)" type="password" formControlName="password" placeholder="password" name="password">
+        <span class="messageError errorpassword">Password min 4 characters</span>
+        <label id="labelDescription">Description</label>
+        <textarea formControlName="description" placeholder=description name="description"></textarea>
+        <span class="messageError errordescription">Description is required</span>
+        <label>Image</label>
+        <input type="file" (change)="changeFile($event)" placeholder="image" name="image">
+        <span class="messageError errorimage">Image not valid</span>
+        <div id="contentImage">
+            <img src="" id="image">
+        </div>
+        <button id="closeImg" (click)="closeImg($event)">X</button>
+        <button id="submitRegister" type="submit">Submit</button>
+    </form>
+</div>

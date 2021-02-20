@@ -1,0 +1,20 @@
+@font-face{
+    font-family: nunito;
+    src: url("./assets/fonts/Nunito-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: nunito;
+}
+
+:root{
+    --blue: #084C61;
+    --green: #177E89;
+    --red: #DB3A34;
+    --yellow: #FFC857;
+    --black: #323031;
+}
