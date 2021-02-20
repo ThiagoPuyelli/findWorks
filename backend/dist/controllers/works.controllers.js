@@ -177,6 +177,9 @@ var getWorksUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const token = req.headers["x-access-token"];
     const works = yield Work_models_1.default.find({ userID: token.split("|")[2] });
     if (works) {
+        works.sort((a, b) => {
+            new Date(a.date).getTime() > new Date(b.date).getTime();
+        });
         res.json(works);
     }
     else {

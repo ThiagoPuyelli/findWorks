@@ -170,3 +170,5 @@ export var updateUser = async (req: Request, res: Response) => {
         });
     }
 }
+
+export var verifyToken = (req: Request, res: Response) => res.json({auth: true});

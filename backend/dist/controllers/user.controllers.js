@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUser = exports.deleteUser = exports.getUser = exports.getUsers = exports.login = exports.register = void 0;
+exports.verifyToken = exports.updateUser = exports.deleteUser = exports.getUser = exports.getUsers = exports.login = exports.register = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const User_models_1 = __importDefault(require("../models/User.models"));
 const encryptPassword_methods_1 = __importDefault(require("../methods/encryptPassword.methods"));
@@ -179,3 +179,5 @@ var updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.updateUser = updateUser;
+var verifyToken = (req, res) => res.json({ auth: true });
+exports.verifyToken = verifyToken;
