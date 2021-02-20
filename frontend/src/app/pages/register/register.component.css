@@ -1,5 +1,4 @@
 #contentRegister{
-    width: 100%;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
@@ -115,4 +114,41 @@ button[type="submit"]:hover {
 #closeImg:hover{
     color: red;
     transform: scale(1.2, 1.2); 
+}
+
+@media (max-width: 670px){
+    input,
+    label,
+    textarea,
+    button[type="submit"],
+    #labelDescription {
+        width: 80% !important;
+    }
+    #contentRegister{
+        width: 80%;
+        margin: 0 auto;
+    }
+    #registerForm{
+        width: 100%;
+    }
+    h1{
+        display:block;
+        width: 40%;
+        text-align: center;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+
+    label{
+        margin-top: 30px;
+    }
+}
+
+@media(max-width: 392px){
+    #contentImage{
+        width: 90%; 
+    }
+    h1{
+        width: 70%;
+    }
 }
