@@ -21,6 +21,7 @@ const userSchema = new Schema({
                             data: { type: String, required: true }
                         }], default: [] }
             }], default: [] },
-    image: { type: String }
+    image: { type: String },
+    public_id: { type: String }
 });
 exports.default = mongoose.model("user", userSchema);

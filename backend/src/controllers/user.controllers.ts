@@ -5,6 +5,7 @@ import encyp from "../methods/encryptPassword.methods";
 import comp from "../methods/comparePassword.methods";
 import fs from "fs";
 import path from "path";
+import { v2 } from "cloudinary";
 
 export var register = async (req: Request, res: Response) => {
     const userEmail = await User.findOne({email: req.body.email});
@@ -19,7 +20,17 @@ export var register = async (req: Request, res: Response) => {
         }
 
         if(req.file){
-            newUser.image = req.file.filename;
+            const image = await v2.uploader.upload(path.join(__dirname, "../uploads/" + req.file.filename));
+            if(image){
+                const { public_id, url } = image;
+                newUser.image = url;
+                newUser.public_id = public_id;
+                await fs.unlinkSync(path.join(__dirname, "../uploads/" + req.file.filename));
+            } else {
+                res.json({
+                    error: "Error al asignar la imagen"
+                })
+            }
         }
 
         if(newUser){
@@ -113,19 +124,31 @@ export var getUser = async (req: Request, res: Response) => {
 }
 
 export var deleteUser = async (req: Request, res: Response) => {
-    var userDelete
+    var user
     if(req.params.id){
-        userDelete = await User.findByIdAndRemove(req.params.id);
+        user = await User.findById(req.params.id);
     } else {
         const userID: any = req.headers["x-access-token"];
-        userDelete = await User.findByIdAndRemove(userID.split("|")[1]);
+        user = await User.findById(userID.split("|")[2]);
     }
 
-    if(userDelete){
-        await fs.unlinkSync(path.join(__dirname + "/../uploads/" + userDelete.image));
-        res.json({
-            message: "Usuario eliminado"
-        })
+    if(user){
+        if(user.image && user.public_id){
+            var destroyImage = await v2.uploader.destroy(user.public_id);
+            if(!destroyImage){
+                res.json({
+                    error: "Error al eliminar la imagen"
+                })
+            };
+        }
+        const userDelete = await User.findByIdAndRemove(user._id);
+        if(userDelete){
+            res.json(userDelete);
+        } else {
+            res.json({
+                error: "Error al eliminar el usuario"
+            });
+        }
     } else {
         res.json({
             error: "Error al eliminar usuario, o el usuario no existe"

@@ -19,6 +19,7 @@ const encryptPassword_methods_1 = __importDefault(require("../methods/encryptPas
 const comparePassword_methods_1 = __importDefault(require("../methods/comparePassword.methods"));
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+const cloudinary_1 = require("cloudinary");
 var register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userEmail = yield User_models_1.default.findOne({ email: req.body.email });
     if (!userEmail) {
@@ -32,7 +33,18 @@ var register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             }
         }
         if (req.file) {
-            newUser.image = req.file.filename;
+            const image = yield cloudinary_1.v2.uploader.upload(path_1.default.join(__dirname, "../uploads/" + req.file.filename));
+            if (image) {
+                const { public_id, url } = image;
+                newUser.image = url;
+                newUser.public_id = public_id;
+                yield fs_1.default.unlinkSync(path_1.default.join(__dirname, "../uploads/" + req.file.filename));
+            }
+            else {
+                res.json({
+                    error: "Error al asignar la imagen"
+                });
+            }
         }
         if (newUser) {
             const user = yield newUser.save();
@@ -123,19 +135,33 @@ var getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getUser = getUser;
 var deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var userDelete;
+    var user;
     if (req.params.id) {
-        userDelete = yield User_models_1.default.findByIdAndRemove(req.params.id);
+        user = yield User_models_1.default.findById(req.params.id);
     }
     else {
         const userID = req.headers["x-access-token"];
-        userDelete = yield User_models_1.default.findByIdAndRemove(userID.split("|")[1]);
+        user = yield User_models_1.default.findById(userID.split("|")[2]);
     }
-    if (userDelete) {
-        yield fs_1.default.unlinkSync(path_1.default.join(__dirname + "/../uploads/" + userDelete.image));
-        res.json({
-            message: "Usuario eliminado"
-        });
+    if (user) {
+        if (user.image && user.public_id) {
+            var destroyImage = yield cloudinary_1.v2.uploader.destroy(user.public_id);
+            if (!destroyImage) {
+                res.json({
+                    error: "Error al eliminar la imagen"
+                });
+            }
+            ;
+        }
+        const userDelete = yield User_models_1.default.findByIdAndRemove(user._id);
+        if (userDelete) {
+            res.json(userDelete);
+        }
+        else {
+            res.json({
+                error: "Error al eliminar el usuario"
+            });
+        }
     }
     else {
         res.json({
