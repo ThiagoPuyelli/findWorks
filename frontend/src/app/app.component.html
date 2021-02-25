@@ -1,6 +1,9 @@
 <header id="headerApp">
-  <h1 id="logo">Find Works</h1>
-  <div class="divLinksHeader" *ngIf="auth">Logueado</div>
+  <h1 id="logo" [routerLink]="['']">Find Works</h1>
+  <div class="divLinksHeader" *ngIf="auth">
+    <a class="linkHeader" [routerLink]="['/profile']">Profile</a>
+    <a class="linkHeader" style="cursor: pointer;" (click)="logout()">Logout</a>
+  </div>
   <div class="divLinksHeader" *ngIf="!auth">
     <a class="linkHeader" [routerLink]="['/login']">Login</a>
     <a class="linkHeader" [routerLink]="['/register']">Register</a>

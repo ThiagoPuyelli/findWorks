@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import User from "../models/User.models";
 import fs from "fs";
 import path from "path";
+import { v2 } from "cloudinary";
 
 export var saveWork = async (req: Request, res: Response) => {
     const work = new Work();
@@ -24,7 +25,10 @@ export var saveWork = async (req: Request, res: Response) => {
     }
 
     if(req.file){
-        work.image = req.file.filename;
+        const newImage = await v2.uploader.upload(path.join(__dirname, "../uploads/" + req.file.filename));
+        if(!newImage) res.json({error: "Error al guardar imagen"});
+        work.image = newImage.url;
+        work.public_id = newImage.public_id;
     }
 
     const userID: any = req.headers["x-access-token"];
@@ -73,8 +77,17 @@ export var updateWork = async (req: Request, res: Response) => {
             }
     
             if(req.file){
-                await fs.unlinkSync(path.join(__dirname, "../uploads/" + work.image));
-                work.image = req.file.filename;
+                const destroyImage = await v2.uploader.destroy(work.public_id);
+                if(!destroyImage) res.json({error: "Error al eliminar la imagen"});
+    
+                const newImage = await v2.uploader.upload(path.join(__dirname, "../uploads/" + req.file.filename));
+                if(!newImage) res.json({error: "Error al agregar nueva imagen"});
+                const { url, public_id } = newImage;
+    
+                work.image = url;
+                work.public_id = public_id;
+                
+                await fs.unlinkSync(path.join(__dirname, "../uploads/" + req.file.filename));
             }
     
             const workUpdate = await Work.findByIdAndUpdate(work._id, work, {new: true});
@@ -102,7 +115,8 @@ export var deleteWork = async (req: Request, res: Response) => {
     if(work){
         const token: any = req.headers["x-access-token"];
         if(work.userID + "" == token.split("|")[2]){
-            await fs.unlinkSync(path.join(__dirname, "../uploads/" + work.image));
+            const destroyImage = await v2.uploader.destroy(work.public_id);
+            if(!destroyImage) res.json({error: "Error al eliminar imagen"});
             const workDelete = await Work.findByIdAndDelete(work._id);
             if(workDelete){
                 res.json("Trabajo eliminado con éxito");
@@ -166,3 +180,5 @@ export var getWorksUser = async (req: Request, res: Response) => {
         });
     }
 }
+
+export var getCategories = async (req: Request, res: Response) => res.json(await Categories.find());

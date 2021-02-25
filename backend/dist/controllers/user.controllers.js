@@ -173,20 +173,27 @@ exports.deleteUser = deleteUser;
 var updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var userToUpdate;
     if (req.params.id) {
-        userToUpdate = yield User_models_1.default.findByIdAndRemove(req.params.id);
+        userToUpdate = yield User_models_1.default.findById(req.params.id);
     }
     else {
         const userID = req.headers["x-access-token"];
-        userToUpdate = yield User_models_1.default.findByIdAndRemove(userID.split("|")[1]);
+        userToUpdate = yield User_models_1.default.findById(userID.split("|")[1]);
     }
     if (userToUpdate) {
-        console.log(req.body);
         for (let i in req.body) {
             userToUpdate[i] = req.body[i];
         }
         if (req.file) {
-            yield fs_1.default.unlinkSync(path_1.default.join(__dirname + "/../uploads/" + userToUpdate.image));
-            userToUpdate.image = req.file.filename;
+            const destroyImage = yield cloudinary_1.v2.uploader.destroy(userToUpdate.public_id);
+            if (!destroyImage)
+                res.json({ error: "Error al eliminar la imagen" });
+            const newImage = yield cloudinary_1.v2.uploader.upload(path_1.default.join(__dirname, "../uploads/" + req.file.filename));
+            if (!newImage)
+                res.json({ error: "Error al agregar nueva imagen" });
+            const { url, public_id } = newImage;
+            userToUpdate.image = url;
+            userToUpdate.public_id = public_id;
+            yield fs_1.default.unlinkSync(path_1.default.join(__dirname, "../uploads/" + req.file.filename));
         }
         if (userToUpdate) {
             const userUpdate = yield User_models_1.default.findByIdAndUpdate(userToUpdate._id, userToUpdate, { new: true });

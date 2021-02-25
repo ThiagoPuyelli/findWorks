@@ -160,22 +160,30 @@ export var deleteUser = async (req: Request, res: Response) => {
 export var updateUser = async (req: Request, res: Response) => {
     var userToUpdate;
     if(req.params.id){
-        userToUpdate = await User.findByIdAndRemove(req.params.id);
+        userToUpdate = await User.findById(req.params.id);
     } else {
         const userID: any = req.headers["x-access-token"];
-        userToUpdate = await User.findByIdAndRemove(userID.split("|")[1]);
+        userToUpdate = await User.findById(userID.split("|")[1]);
     }
 
 
     if(userToUpdate){
-        console.log(req.body)
         for(let i in req.body){
             userToUpdate[i] = req.body[i];
         }
 
         if(req.file){
-            await fs.unlinkSync(path.join(__dirname + "/../uploads/" + userToUpdate.image));
-            userToUpdate.image = req.file.filename;
+            const destroyImage = await v2.uploader.destroy(userToUpdate.public_id);
+            if(!destroyImage) res.json({error: "Error al eliminar la imagen"});
+
+            const newImage = await v2.uploader.upload(path.join(__dirname, "../uploads/" + req.file.filename));
+            if(!newImage) res.json({error: "Error al agregar nueva imagen"});
+            const { url, public_id } = newImage;
+
+            userToUpdate.image = url;
+            userToUpdate.public_id = public_id;
+            
+            await fs.unlinkSync(path.join(__dirname, "../uploads/" + req.file.filename));
         }
 
         if(userToUpdate){

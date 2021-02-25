@@ -15,4 +15,5 @@ router.post("/admin", verifyTokenAdmin_1.default, admin_controllers_1.saveAdmin)
 router.post("/admin/login", admin_controllers_1.login);
 router.put("/admin-email", verifyTokenAdmin_1.default, admin_controllers_1.adminUpdateEmail);
 router.put("/admin-password", verifyTokenAdmin_1.default, admin_controllers_1.adminUpdatePassword);
+router.post("/categories", verifyTokenAdmin_1.default, admin_controllers_1.addCategorie);
 exports.default = router;

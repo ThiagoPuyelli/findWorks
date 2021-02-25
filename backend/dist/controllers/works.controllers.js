@@ -12,12 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getWorksUser = exports.getWorksCategory = exports.deleteWork = exports.updateWork = exports.getWork = exports.getWorks = exports.saveWork = void 0;
+exports.getCategories = exports.getWorksUser = exports.getWorksCategory = exports.deleteWork = exports.updateWork = exports.getWork = exports.getWorks = exports.saveWork = void 0;
 const Work_models_1 = __importDefault(require("../models/Work.models"));
 const Categories_models_1 = __importDefault(require("../models/Categories.models"));
 const User_models_1 = __importDefault(require("../models/User.models"));
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+const cloudinary_1 = require("cloudinary");
 var saveWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const work = new Work_models_1.default();
     for (let i in req.body) {
@@ -37,7 +38,11 @@ var saveWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
     }
     if (req.file) {
-        work.image = req.file.filename;
+        const newImage = yield cloudinary_1.v2.uploader.upload(path_1.default.join(__dirname, "../uploads/" + req.file.filename));
+        if (!newImage)
+            res.json({ error: "Error al guardar imagen" });
+        work.image = newImage.url;
+        work.public_id = newImage.public_id;
     }
     const userID = req.headers["x-access-token"];
     const user = yield User_models_1.default.findById(userID.split("|")[2]);
@@ -87,8 +92,16 @@ var updateWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 }
             }
             if (req.file) {
-                yield fs_1.default.unlinkSync(path_1.default.join(__dirname, "../uploads/" + work.image));
-                work.image = req.file.filename;
+                const destroyImage = yield cloudinary_1.v2.uploader.destroy(work.public_id);
+                if (!destroyImage)
+                    res.json({ error: "Error al eliminar la imagen" });
+                const newImage = yield cloudinary_1.v2.uploader.upload(path_1.default.join(__dirname, "../uploads/" + req.file.filename));
+                if (!newImage)
+                    res.json({ error: "Error al agregar nueva imagen" });
+                const { url, public_id } = newImage;
+                work.image = url;
+                work.public_id = public_id;
+                yield fs_1.default.unlinkSync(path_1.default.join(__dirname, "../uploads/" + req.file.filename));
             }
             const workUpdate = yield Work_models_1.default.findByIdAndUpdate(work._id, work, { new: true });
             if (workUpdate) {
@@ -118,7 +131,9 @@ var deleteWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (work) {
         const token = req.headers["x-access-token"];
         if (work.userID + "" == token.split("|")[2]) {
-            yield fs_1.default.unlinkSync(path_1.default.join(__dirname, "../uploads/" + work.image));
+            const destroyImage = yield cloudinary_1.v2.uploader.destroy(work.public_id);
+            if (!destroyImage)
+                res.json({ error: "Error al eliminar imagen" });
             const workDelete = yield Work_models_1.default.findByIdAndDelete(work._id);
             if (workDelete) {
                 res.json("Trabajo eliminado con éxito");
@@ -189,3 +204,5 @@ var getWorksUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.getWorksUser = getWorksUser;
+var getCategories = (req, res) => __awaiter(void 0, void 0, void 0, function* () { return res.json(yield Categories_models_1.default.find()); });
+exports.getCategories = getCategories;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { LoginService } from "../../services/login.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private builder: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ) {
     this.dataForm = this.builder.group({
       email: ["", [Validators.required, Validators.email]],
@@ -36,7 +38,8 @@ export class LoginComponent implements OnInit {
             const msgNoAuth: any = document.querySelector(".noAuth");
             msgNoAuth.style.display = "block";
           } else {
-            console.log(result)
+            sessionStorage.setItem("x-access-token", result.token);
+            location.reload();
           }
         },
         err => {

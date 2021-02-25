@@ -21,4 +21,9 @@ export class AppComponent implements OnInit, AfterContentChecked{
     if(this.verifyAuth.auth) this.auth = true;
     }
 
+    logout(){
+      sessionStorage.removeItem("x-access-token");
+      location.reload();
+    }
+
 }

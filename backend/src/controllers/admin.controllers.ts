@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import comp from "../methods/comparePassword.methods";
 import jwt from "jsonwebtoken";
 import encp from "../methods/encryptPassword.methods";
+import Categorie from "../models/Categories.models";
 
 export var saveAdmin = async (req: Request, res: Response) => {
     const { email, password } = req.body;
@@ -106,4 +107,25 @@ export var adminUpdatePassword = async (req: Request, res: Response) => {
 export var deleteAdmin = async (req: Request, res: Response) => {
     const adminDelete = await Admin.findByIdAndRemove(req.params.id);
     res.json(adminDelete);
+}
+
+export var addCategorie = async (req: Request, res: Response) => {
+    const { category } = req.body;
+    
+    if(category){
+        const categorie: any = new Categorie();
+        categorie.categorie = categorie;
+        const categorySave: any = await categorie.save();
+        if(categorySave){
+            res.json(categorySave);
+        } else {
+            res.json({
+                error: "Error al guardar la categoria"
+            });
+        }
+    } else {
+        res.json({
+            error :"La informacion no es válida"
+        });
+    }
 }

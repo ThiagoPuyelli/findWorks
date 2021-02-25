@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteAdmin = exports.adminUpdatePassword = exports.adminUpdateEmail = exports.login = exports.saveAdmin = void 0;
+exports.addCategorie = exports.deleteAdmin = exports.adminUpdatePassword = exports.adminUpdateEmail = exports.login = exports.saveAdmin = void 0;
 const Admin_models_1 = __importDefault(require("../models/Admin.models"));
 const comparePassword_methods_1 = __importDefault(require("../methods/comparePassword.methods"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const encryptPassword_methods_1 = __importDefault(require("../methods/encryptPassword.methods"));
+const Categories_models_1 = __importDefault(require("../models/Categories.models"));
 var saveAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     if (email && password) {
@@ -125,3 +126,25 @@ var deleteAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json(adminDelete);
 });
 exports.deleteAdmin = deleteAdmin;
+var addCategorie = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { category } = req.body;
+    if (category) {
+        const categorie = new Categories_models_1.default();
+        categorie.categorie = categorie;
+        const categorySave = yield categorie.save();
+        if (categorySave) {
+            res.json(categorySave);
+        }
+        else {
+            res.json({
+                error: "Error al guardar la categoria"
+            });
+        }
+    }
+    else {
+        res.json({
+            error: "La informacion no es válida"
+        });
+    }
+});
+exports.addCategorie = addCategorie;
