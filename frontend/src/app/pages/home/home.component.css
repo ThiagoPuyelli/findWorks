@@ -76,19 +76,73 @@
 }
 
 .work{
-    width: 95%;
-    height: 300px;
+    display: flex;
+    flex-flow: row wrap;
+    width: 92%;
+    height: 199px;
     border-radius: 20px;
     padding: 20px;
     border: 1px solid #ccc;
     box-shadow: 0px 0px 4px #ccc;
-    margin-top: 20px;
+    margin-top: 10px;
+    padding-right: 0px;
+}
+
+.spans{
+    width: 50%;
+    display: flex;
+    flex-flow: row wrap;
 }
 
 .work .workImage{
     width: 300px;
+    height: 200px;
+}
+
+.work h2{
+    display: block;
+    width: 90%;
+    padding-left: 20px;
+}
+
+.work span {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    margin-top: 120px;
+    margin-left: 20px;
 }
 
 .work span img{
-    width: 60px;
+    width: 20px;
+    margin: 0 auto;
+}
+
+.work span p {
+    display: block;
+    text-align: center;
+}
+
+@media (max-width: 1234px){
+    
+    #divWorks{
+        width: 72%;
+    }
+    
+    #lateral-bar{
+        width: 150px;
+    }
+}
+
+@media (max-width: 1120px){
+    .spans{
+        width: 30%;
+        justify-content: center;
+    }
+    
+    .work span {
+        width: 80px; 
+        margin-top: 20px;
+        margin-left: 20px;
+    }
 }
