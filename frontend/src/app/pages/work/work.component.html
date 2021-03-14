@@ -1,0 +1,41 @@
+<div id="contentWork" *ngIf="work">
+    <div id="imageTitle">
+        <div id="titleSpans">
+            <h1>{{work.title}}</h1>
+            <div id="spans">
+                <div>
+                    <img src="../../../assets/img/clock.svg" alt="">
+                    <p>{{work.time}}</p>
+                </div>
+                <div>
+                    <img src="../../../assets/img/pin.svg" alt="">
+                    <p>{{work.location}}</p>
+                </div>
+                <div>
+                    <img *ngIf="work.locationwork == 'presencial'" src="../../../assets/img/office.svg" alt="">
+                    <img *ngIf="work.locationwork == 'home'" src="../../../assets/img/work-from-home.svg" alt="">
+                    <p>{{work.locationwork}}</p>
+                </div>
+                <div>
+                    <img src="../../../assets/img/category.svg" alt="">
+                    <p>{{work.category}}</p>
+                </div>
+            </div>
+        </div>
+        <img src="{{work.image}}" alt="">
+    </div>
+
+    <div id="dataForWork">
+        <p id="description">
+            {{work.description}}
+        </p>
+        <div id="requeriments">
+            <h1>Requeriments</h1>
+            <p>{{work.requeriments}}</p>
+        </div>
+    </div>
+
+    <button class="buttonSend" *ngIf="owner">Update Work</button>
+    <button class="buttonSend" *ngIf="!owner">Send Consult</button>
+
+</div>

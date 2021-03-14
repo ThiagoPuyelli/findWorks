@@ -6,11 +6,16 @@ import { RegisterComponent } from "./pages/register/register.component";
 
 import { AuthGuard } from "./auth/auth.guard";
 import { NoAuthGuard } from "./auth/no-auth.guard";
+import { WorkComponent } from './pages/work/work.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
+  { path: "page/:page", component: HomeComponent },
+  { path: "category/:category", component: HomeComponent },
+  { path: "category-page/:category/:page", component: HomeComponent },
   { path: "login", component: LoginComponent, canActivate: [NoAuthGuard], canLoad: [NoAuthGuard]},
-  { path: "register", component: RegisterComponent, canActivate: [NoAuthGuard], canLoad: [NoAuthGuard]}
+  { path: "register", component: RegisterComponent, canActivate: [NoAuthGuard], canLoad: [NoAuthGuard]},
+  { path: "work/:id", component: WorkComponent}
 ];
 
 @NgModule({

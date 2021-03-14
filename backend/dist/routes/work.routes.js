@@ -9,11 +9,13 @@ const verifyTokenUser_1 = __importDefault(require("../middlewares/verifyTokenUse
 const multer_middlewares_1 = __importDefault(require("../middlewares/multer.middlewares"));
 const works_controllers_1 = require("../controllers/works.controllers");
 router.post("/works", verifyTokenUser_1.default, multer_middlewares_1.default.single("image"), works_controllers_1.saveWork);
-router.get("/works", works_controllers_1.getWorks);
-router.get("/works/:id", verifyTokenUser_1.default, works_controllers_1.getWork);
+router.get("/works/:page", works_controllers_1.getWorks);
+router.get("/works-id/:id", works_controllers_1.getWork);
 router.put("/works/:id", verifyTokenUser_1.default, multer_middlewares_1.default.single("image"), works_controllers_1.updateWork);
 router.delete("/works/:id", verifyTokenUser_1.default, works_controllers_1.deleteWork);
-router.get("/works-categories/:categories", verifyTokenUser_1.default, works_controllers_1.getWorksCategory);
+router.get("/works-categories/:categories/:page", works_controllers_1.getWorksCategory);
 router.get("/works-user", verifyTokenUser_1.default, works_controllers_1.getWorksUser);
 router.get("/categories", works_controllers_1.getCategories);
+router.get("/pages", works_controllers_1.getQuantityPages);
+router.get("/pages/:category", works_controllers_1.getQuantityPagesCategory);
 exports.default = router;

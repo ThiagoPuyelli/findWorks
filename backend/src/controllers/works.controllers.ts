@@ -1,10 +1,11 @@
 import Work from "../models/Work.models";
 import Categories from "../models/Categories.models";
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import User from "../models/User.models";
 import fs from "fs";
 import path from "path";
 import { v2 } from "cloudinary";
+import separeWorks from "../methods/separeWorks";
 
 export var saveWork = async (req: Request, res: Response) => {
     const work = new Work();
@@ -52,7 +53,57 @@ export var saveWork = async (req: Request, res: Response) => {
     }
 }
 
-export var getWorks = async (req: Request, res: Response) => res.json(await Work.find());
+export var getQuantityPages = async (req: Request, res: Response) => {
+    var works = [];
+    if(req.params.category){
+        works = await Work.find({category: req.params.category});
+    } else {
+        works = await Work.find();
+    }
+    var contador: Array<number> = [];
+    for(let i = 0; i < works.length; i++){
+        if(i == 0){
+            contador.push(i);
+        } else {
+            i *= 10;
+            if(i < works.length) contador.push(i);
+        }
+    }
+    res.json(contador);
+}
+
+export var getQuantityPagesCategory = async (req: Request, res: Response) => {
+    var category: string|Array<string> = req.params.category;
+    console.log(category)
+    if(category){
+        category = category.split("-");
+        var works: Array<any> = [];
+        for(let i of category){
+            const worksSearch = await Work.find({category: i});
+            works.push(...worksSearch);
+        }
+        var contador: Array<number> = [];
+        for(let i = 0; i < works.length; i++){
+            if(i == 0){
+                contador.push(i);
+            } else {
+                i *= 10;
+                if(i < works.length) contador.push(i);
+            }
+        }
+        res.json(contador);
+    } else {
+        res.json({
+            error: "La categoría no es válida"
+        })
+    }
+}
+
+export var getWorks = async (req: Request, res: Response) => {
+    const worksTotal = await Work.find();
+    const works = await separeWorks(worksTotal, parseInt(req.params.page));
+    res.json(works);
+};
 
 export var getWork = async (req: Request, res: Response) => res.json(await Work.findById(req.params.id));
 
@@ -139,31 +190,31 @@ export var deleteWork = async (req: Request, res: Response) => {
 
 export var getWorksCategory = async (req: Request, res: Response) => {
     var categories: string|string[] = req.params.categories;
-    if(categories){
-        categories = categories.split("-");
-        var works: any = [];
-        if(categories.length > 1){
-            for(let i of categories){
-                const worksFind = await Work.find({category: i});
-                for(let indexWorksFind of worksFind){
-                    works.push(indexWorksFind);
-                }
+    const page: number = parseInt(req.params.page);
+    categories = categories.split("-");
+    var works: any = [];
+    if(categories.length > 1){
+        for(let i of categories){
+            const worksFind = await Work.find({category: i});
+            for(let indexWorksFind of worksFind){
+                works.push(indexWorksFind);
             }
-        } else {
-            const worksFind = await Work.find({category: categories});
-            works.push(worksFind);
         }
-        if(works.length > 0){
-            works.sort((a: any, b: any) => {
-                new Date(a.date).getTime() > new Date(b.date).getTime()
-            })
-        }
-        res.json(works);
     } else {
-        res.json({
-            error: "Las categorias no son válidas"
-        });
+        categories = categories[0];
+        const worksFind = await Work.find({category: categories});
+        works = worksFind;
     }
+    if(works.length > 0){
+        works.sort((a: any, b: any) => {
+            new Date(a.date).getTime() > new Date(b.date).getTime()
+        })
+    }
+    const worksSend = await separeWorks(works, page);
+    if(worksSend) res.json(worksSend);
+    res.json({
+        error: "No se pudo separar los trabajos"
+    });
 }
 
 export var getWorksUser = async (req: Request, res: Response) => {

@@ -7,6 +7,7 @@
     width: 100%;
     height: 85px;
     border: 1px solid #ccc;
+    border-top: none;
 }
 
 #divInputSearch{
@@ -41,6 +42,7 @@
     display: flex;
     flex-flow: row wrap;
     width: 100%;
+    justify-content: space-between;
 }
 
 #lateral-bar{
@@ -58,6 +60,10 @@
     font-size: 24px;
     font-family: sans-serif;
     color: var(--blue);
+}
+
+#worksApp {
+    width: 70%;
 }
 
 .labelInput{
@@ -123,6 +129,45 @@
     text-align: center;
 }
 
+#pages{
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0px auto;
+    width: 400px;
+    justify-content: center;
+
+}
+
+.pageButton{
+    display: flex;
+    flex-flow: column wrap;
+    margin-left: 20px;
+    align-items: center;
+}
+
+.pageButton:hover .pagePoint{
+    background-color: #666;
+}
+
+.pagePoint{
+    cursor: pointer;
+    transition: 300ms all; 
+    width: 13px;
+    height: 13px;
+    border-radius: 999px;
+    background-color: #ccc; 
+}
+
+.pageActive {
+    background-color: #666;
+    cursor: normal !important;
+}
+
+#worksApp {
+    margin-right: 50px;
+    width: 63%;
+}
+
 @media (max-width: 1234px){
     
     #divWorks{
@@ -136,7 +181,7 @@
 
 @media (max-width: 1120px){
     .spans{
-        width: 30%;
+        width: 200px;
         justify-content: center;
     }
     
@@ -144,5 +189,119 @@
         width: 80px; 
         margin-top: 20px;
         margin-left: 20px;
+    }
+
+    .work span:nth-child(1){
+        margin-top: 60px;
+    }
+
+    #divWorks{
+        width: 65%;
+    }
+
+    #lateral-bar{
+        width: 15%;
+    }
+
+    .labelInput{
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 894px){
+    #containerNoAuth{
+        flex-flow: column wrap !important;
+        justify-content: normal;
+    }
+
+    #lateral-bar{
+        flex-flow: row wrap !important;
+        width: 85%;
+        height: 120px;
+        margin: 0px auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    #lateral-bar h3 {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    #lateral-bar label{
+        font-size: 18px;
+    }
+    
+    #worksApp {
+        width: 100%;
+        height: auto;
+        margin: 0px auto;
+    }
+
+    .work{
+        width: 93%;
+        margin: 0 auto;
+        margin-top: 10px;
+    }
+}
+
+@media(max-width: 590px){
+    #lateral-bar {
+        height: 200px;
+    }
+
+    .work .workImage{
+        margin: 0 auto;
+    }
+
+    .work .spans{
+        width: 100%;
+    }
+
+    .work h2{
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .work{
+        height: 300px;
+    }
+}
+
+@media (max-width: 506px){
+    #divInputSearch{
+        width: 80%;
+    }
+
+    #divInputSearch button{
+        position: absolute;
+        right: 55px;
+        top: 90px;
+        background-color: transparent;
+    }
+
+    .work .workImage{
+        width: 150px;
+        height: 100px;
+    }
+    
+    .spans {
+        width: 100%;
+    }
+
+    #divWorks{
+        width: 90%;
+    }
+
+    .work{
+        width: 95%;
+    }
+}
+
+@media (max-width: 386px){
+    #lateral-bar{
+        width: 70%;
+        height: 300px;
     }
 }

@@ -1,0 +1,13 @@
+<div id="divWorks">
+    <div class="work" *ngFor="let i of works" [routerLink]="['/work/' + i._id]">
+        <img class="workImage" src="{{i.image}}" alt="">
+        <div class=spans>
+            <h2>{{i.title}}</h2>
+            <span class="workTime firstSpan"><img src="../../../assets/img/clock.svg" alt=""><p>{{i.time}}</p></span>
+            <span class="workLocation firstSpan"><img src="../../../assets/img/pin.svg" alt=""><p>{{i.location}}</p></span>
+            <span class="workLocationWork" *ngIf="i.locationwork == 'presencial'"><img src="../../../assets/img/office.svg" alt=""><p>Presencial</p></span>
+            <span class="workLocationWork" *ngIf="i.locationwork == 'home'"><img src="../../../assets/img/work-from-home.svg" alt=""><p>Home office</p></span>
+            <span class="workCategory"><img src="../../../assets/img/category.svg" alt=""><p>{{i.category}}</p></span>
+        </div>
+    </div>
+</div>

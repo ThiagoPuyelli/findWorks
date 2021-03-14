@@ -12,13 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCategories = exports.getWorksUser = exports.getWorksCategory = exports.deleteWork = exports.updateWork = exports.getWork = exports.getWorks = exports.saveWork = void 0;
+exports.getCategories = exports.getWorksUser = exports.getWorksCategory = exports.deleteWork = exports.updateWork = exports.getWork = exports.getWorks = exports.getQuantityPagesCategory = exports.getQuantityPages = exports.saveWork = void 0;
 const Work_models_1 = __importDefault(require("../models/Work.models"));
 const Categories_models_1 = __importDefault(require("../models/Categories.models"));
 const User_models_1 = __importDefault(require("../models/User.models"));
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const cloudinary_1 = require("cloudinary");
+const separeWorks_1 = __importDefault(require("../methods/separeWorks"));
 var saveWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const work = new Work_models_1.default();
     for (let i in req.body) {
@@ -66,7 +67,63 @@ var saveWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.saveWork = saveWork;
-var getWorks = (req, res) => __awaiter(void 0, void 0, void 0, function* () { return res.json(yield Work_models_1.default.find()); });
+var getQuantityPages = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var works = [];
+    if (req.params.category) {
+        works = yield Work_models_1.default.find({ category: req.params.category });
+    }
+    else {
+        works = yield Work_models_1.default.find();
+    }
+    var contador = [];
+    for (let i = 0; i < works.length; i++) {
+        if (i == 0) {
+            contador.push(i);
+        }
+        else {
+            i *= 10;
+            if (i < works.length)
+                contador.push(i);
+        }
+    }
+    res.json(contador);
+});
+exports.getQuantityPages = getQuantityPages;
+var getQuantityPagesCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var category = req.params.category;
+    console.log(category);
+    if (category) {
+        category = category.split("-");
+        var works = [];
+        for (let i of category) {
+            const worksSearch = yield Work_models_1.default.find({ category: i });
+            works.push(...worksSearch);
+        }
+        var contador = [];
+        for (let i = 0; i < works.length; i++) {
+            if (i == 0) {
+                contador.push(i);
+            }
+            else {
+                i *= 10;
+                if (i < works.length)
+                    contador.push(i);
+            }
+        }
+        res.json(contador);
+    }
+    else {
+        res.json({
+            error: "La categoría no es válida"
+        });
+    }
+});
+exports.getQuantityPagesCategory = getQuantityPagesCategory;
+var getWorks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const worksTotal = yield Work_models_1.default.find();
+    const works = yield separeWorks_1.default(worksTotal, parseInt(req.params.page));
+    res.json(works);
+});
 exports.getWorks = getWorks;
 var getWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () { return res.json(yield Work_models_1.default.findById(req.params.id)); });
 exports.getWork = getWork;
@@ -159,33 +216,33 @@ var deleteWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.deleteWork = deleteWork;
 var getWorksCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var categories = req.params.categories;
-    if (categories) {
-        categories = categories.split("-");
-        var works = [];
-        if (categories.length > 1) {
-            for (let i of categories) {
-                const worksFind = yield Work_models_1.default.find({ category: i });
-                for (let indexWorksFind of worksFind) {
-                    works.push(indexWorksFind);
-                }
+    const page = parseInt(req.params.page);
+    categories = categories.split("-");
+    var works = [];
+    if (categories.length > 1) {
+        for (let i of categories) {
+            const worksFind = yield Work_models_1.default.find({ category: i });
+            for (let indexWorksFind of worksFind) {
+                works.push(indexWorksFind);
             }
         }
-        else {
-            const worksFind = yield Work_models_1.default.find({ category: categories });
-            works.push(worksFind);
-        }
-        if (works.length > 0) {
-            works.sort((a, b) => {
-                new Date(a.date).getTime() > new Date(b.date).getTime();
-            });
-        }
-        res.json(works);
     }
     else {
-        res.json({
-            error: "Las categorias no son válidas"
+        categories = categories[0];
+        const worksFind = yield Work_models_1.default.find({ category: categories });
+        works = worksFind;
+    }
+    if (works.length > 0) {
+        works.sort((a, b) => {
+            new Date(a.date).getTime() > new Date(b.date).getTime();
         });
     }
+    const worksSend = yield separeWorks_1.default(works, page);
+    if (worksSend)
+        res.json(worksSend);
+    res.json({
+        error: "No se pudo separar los trabajos"
+    });
 });
 exports.getWorksCategory = getWorksCategory;
 var getWorksUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

@@ -9,21 +9,23 @@
         <div id="lateral-bar">
             <h3>Categorías</h3>
             <label class="labelInput" *ngFor="let i of categories">
-                <input type="checkbox" value="{{i}}">{{i}}
+                <input type="checkbox" (click)="changeCategory(i)" value="{{i}}" id="{{i}}">{{i}}
             </label>
         </div>
-        <div id="divWorks">
-            <div class="work" *ngFor="let i of works" [routerLink]="['/work/' + i._id]">
-                <img class="workImage" src="{{i.image}}" alt="">
-                <div class=spans>
-                    <h2>{{i.title}}</h2>
-                    <span class="workTime"><img src="../../../assets/img/clock.svg" alt=""><p>{{i.time}}</p></span>
-                    <span class="workLocation"><img src="../../../assets/img/pin.svg" alt=""><p>{{i.location}}</p></span>
-                    <span class="workLocationWork" *ngIf="i.locationwork == 'presencial'"><img src="../../../assets/img/office.svg" alt=""><p>Presencial</p></span>
-                    <span class="workLocationWork" *ngIf="i.locationwork == 'home'"><img src="../../../assets/img/work-from-home.svg" alt=""><p>Home office</p></span>
-                    <span class="workCategory"><img src="../../../assets/img/category.svg" alt=""><p>{{i.category}}</p></span>
-                </div>
-            </div>
+        <app-works id="worksApp" page="{{page}}" category="{{this.category}}"></app-works>
+    </div>
+    <div id="pages" *ngIf="category">
+        <div class="pageButton pageButton{{i}}" *ngFor="let i of pages" >
+            <div class="pagePoint" *ngIf="i == 0" [routerLink]="['/category/' + category]"></div> 
+            <div class="pagePoint" *ngIf="i > 0" [routerLink]="['/category-page/' + category + '/' + i]"></div> 
+            <span class="pageNumber">{{i}}</span>
+        </div>
+    </div>
+    <div id="pages" *ngIf="!category">
+        <div class="pageButton pageButton{{i}}" *ngFor="let i of pages" >
+            <div class="pagePoint" *ngIf="i == 0" [routerLink]="['/']"></div> 
+            <div class="pagePoint" *ngIf="i > 0" [routerLink]="['/page/' + i]"></div> 
+            <span class="pageNumber">{{i}}</span>
         </div>
     </div>
 </div>
