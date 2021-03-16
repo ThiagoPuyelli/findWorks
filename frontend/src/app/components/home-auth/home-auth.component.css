@@ -1,0 +1,43 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+#contentHomeAuth{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+#title{
+    font-size: 40px;
+    margin: 40px;
+}
+
+#boxsLinks{
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.linkBox{
+    width: 200px;
+    box-shadow: 0px 0px 8px black;
+    border-radius: 20px;
+    padding: 20px;
+    transition: 300ms all;
+    cursor: pointer;
+}
+
+.linkBox:hover{
+    transform: scale(1.2, 1.2);
+}
+
+.linkBox h1{
+    text-align: center;
+}
+
+.linkBox img {
+    width: 100%;
+}

@@ -14,7 +14,7 @@ const Work = new Schema({
     public_id: {type: String},
     rating: {type: Number, default: 0, min: 0, max: 5},
     calificates: {type: [Number], default: [], min: 0, max: 5},
-    requeriments: {type: String, required: true}
+    requeriments: {type: [String], required: true}
 })
 
 export default mongoose.model("work", Work);

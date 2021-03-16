@@ -11,7 +11,7 @@ const verifyTokenUser_1 = __importDefault(require("../middlewares/verifyTokenUse
 const multer_middlewares_1 = __importDefault(require("../middlewares/multer.middlewares"));
 router.post("/users/register", multer_middlewares_1.default.single("image"), user_controllers_1.register);
 router.post("/users/login", user_controllers_1.login);
-router.get("/users/:id", verifyTokenUser_1.default, user_controllers_1.getUser);
+router.get("/users/:id", user_controllers_1.getUser);
 router.delete("/users", verifyTokenUser_1.default, user_controllers_1.deleteUser);
 router.put("/users", verifyTokenUser_1.default, multer_middlewares_1.default.single("image"), user_controllers_1.updateUser);
 router.get("/auth", verifyTokenUser_1.default, user_controllers_1.verifyToken);

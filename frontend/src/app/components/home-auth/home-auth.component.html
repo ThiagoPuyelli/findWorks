@@ -1,0 +1,18 @@
+<div id="contentHomeAuth">
+    <h1 id="title">Hola {{user.name + " " + user.lastname}}</h1>
+    
+    <div id="boxsLinks">
+        <div [routerLink]="['/add-work']" class="linkBox">
+            <h1>Add Work</h1>
+            <img src="../../../assets/img/add.svg" alt="">
+        </div>
+        <div [routerLink]="['/works-user']" class="linkBox">
+            <h1>Work List</h1>
+            <img src="../../../assets/img/suitcase.svg" alt="">
+        </div>
+        <div [routerLink]="['/consults']" class="linkBox">
+            <h1>Consults</h1>
+            <img src="../../../assets/img/client.svg" alt="">
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from "@angular/common/http";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +10,10 @@ import { RegisterComponent } from './pages/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
 import { WorksComponent } from './components/works/works.component';
 import { WorkComponent } from './pages/work/work.component';
+import { HomeAuthComponent } from './components/home-auth/home-auth.component';
+import { ConsultsComponent } from './pages/consults/consults.component';
+import { AddWorkComponent } from './pages/add-work/add-work.component';
+import { WorksListComponent } from './pages/works-list/works-list.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +22,18 @@ import { WorkComponent } from './pages/work/work.component';
     RegisterComponent,
     HomeComponent,
     WorksComponent,
-    WorkComponent
+    WorkComponent,
+    HomeAuthComponent,
+    ConsultsComponent,
+    AddWorkComponent,
+    WorksListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

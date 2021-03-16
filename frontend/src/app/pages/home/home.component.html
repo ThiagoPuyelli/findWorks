@@ -1,10 +1,4 @@
 <div *ngIf="!auth" class="homeNoAuth">
-    <div id="overHeader">
-    <form id="divInputSearch">
-            <input type="text" placeholder="Search Work..." id="inputSearch">
-            <button type="submit"><img src="../../../assets/img/search.svg" alt=""></button> 
-        </form>
-    </div>
     <div id=containerNoAuth>
         <div id="lateral-bar">
             <h3>Categorías</h3>
@@ -28,4 +22,8 @@
             <span class="pageNumber">{{i}}</span>
         </div>
     </div>
+</div>
+
+<div *ngIf="auth" class="homeAuth">
+    <app-home-auth></app-home-auth>
 </div>

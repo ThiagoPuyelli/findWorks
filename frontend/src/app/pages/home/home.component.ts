@@ -27,9 +27,6 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     private router: Router
   ) {
     this.auth = false;
-    if(this.verifyAuth.auth){
-      this.auth = true;
-    }
     this.pages = [];
     this.categories = [];
     this.works = [];
@@ -77,7 +74,9 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   ngAfterViewChecked(): void {
     this.setPageIndex();
     this.verifyCheckbox();
-    
+    if(this.verifyAuth.auth){
+      this.auth = true;
+    }
   }
 
   async changeCategory(category: string) {
