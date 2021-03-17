@@ -35,7 +35,8 @@
         </div>
     </div>
 
-    <button class="buttonSend" *ngIf="owner">Update Work</button>
+    <button class="buttonSend" *ngIf="owner" [routerLink]="['/update-work/' + workID]">Update Work</button>
+    <button class="buttonSend delete" (click)="deleteWork()" *ngIf="owner">Delete Work</button>
     <button class="buttonSend" *ngIf="!owner">Send Consult</button>
 
 </div>

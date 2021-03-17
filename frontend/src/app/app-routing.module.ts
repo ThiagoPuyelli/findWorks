@@ -10,6 +10,7 @@ import { WorkComponent } from './pages/work/work.component';
 import { ConsultsComponent } from './pages/consults/consults.component';
 import { WorksListComponent } from './pages/works-list/works-list.component';
 import { AddWorkComponent } from './pages/add-work/add-work.component';
+import { UpdateWorkComponent } from './pages/update-work/update-work.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: "consults", component: ConsultsComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
   { path: "works-user", component: WorksListComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
   { path: "add-work", component: AddWorkComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
+  { path: "update-work/:id", component: UpdateWorkComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]}
 ];
 
 @NgModule({

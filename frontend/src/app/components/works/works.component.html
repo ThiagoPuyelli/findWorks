@@ -1,4 +1,4 @@
-<div id="divWorks">
+<div id="divWorks" *ngIf="works.length > 0">
     <div class="work" *ngFor="let i of works" [routerLink]="['/work/' + i._id]">
         <img class="workImage" src="{{i.image}}" alt="">
         <div class=spans>
@@ -11,3 +11,5 @@
         </div>
     </div>
 </div>
+
+<h1 *ngIf="works.length == 0">Don't find works</h1>

@@ -10,6 +10,7 @@ export class WorksComponent implements OnInit {
 
   @Input() page: any;
   @Input() category: any;
+  @Input() user: string|undefined;
 
   public works: Array<any>;
 
@@ -17,6 +18,7 @@ export class WorksComponent implements OnInit {
     private getWorks: GetWorksService
   ) {
     this.works = [];
+    if(this.user == undefined) this.user = "false";
    }
 
   ngOnInit(): void {
@@ -37,6 +39,14 @@ export class WorksComponent implements OnInit {
         },
         err => {
           console.log(err);
+        }
+      )
+    } else if(this.user == "true") {
+      this.getWorks.findWorksUser().subscribe(
+        (result: any) => {
+          for(let i of result){
+            this.works.push(i);
+          }
         }
       )
     } else {

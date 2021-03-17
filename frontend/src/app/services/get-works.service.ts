@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import { Observer } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +29,12 @@ export class GetWorksService {
 
   findPagesCategory(category: string){
     return this.http.get(environment.uri + "/pages/" + category);
+  }
+
+  findWorksUser(){
+    const token: any = sessionStorage.getItem("x-access-token")
+    let headers = new HttpHeaders().set("x-access-token", token);
+    return this.http.get(environment.uri + "/works-user", {headers})
   }
   
 }

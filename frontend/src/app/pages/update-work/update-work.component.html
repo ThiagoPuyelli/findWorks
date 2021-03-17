@@ -1,0 +1,45 @@
+<div id="contentAddWork">
+    <h1>Add Work</h1>
+    <form (submit)="submitForm()" [formGroup]="dataForm" id=formAdd>
+        <label>Title</label>
+        <input class="inputForm title" (change)="changeInput('title')" formControlName="title" type="text" name="title" placeholder="Title">
+        <span class="msgError title">Title is required</span>
+        <label>Time</label>
+        <select class="selectForm time" formControlName="time">
+            <option value="Full Time">Full Time</option>
+            <option value="Part Time">Part Time</option>
+        </select>
+        <span class="msgError time">Time is required</span>
+        <label>Description</label>
+        <textarea class="inputForm description" (change)="changeInput('description')" formControlName="description" name="description" placeholder="Description"></textarea>
+        <span class="msgError description">Description is required</span>
+        <label>Category</label>
+        <select class="selectForm" formControlName="category">
+            <option *ngFor="let i of categories" value="{{i}}">{{i}}</option>
+        </select>
+        <span class="msgError category">Category is required</span>
+        <label>Location</label>
+        <input type="text" class="inputForm" (change)="changeInput('location')" formControlName="location" placeholder=Location>
+        <span class="msgError location">Location is required</span>
+        <label>Type of work</label>
+        <select class="selectForm" formControlName="locationwork">
+            <option value="Home office">Home office</option>
+            <option value="Presential">Presential</option>
+        </select>
+        <span class="msgError locationwork">Type of work is required</span>
+        <label>Image</label>
+        <input type="file" placeholder="Image" (change)="changeFile($event)">
+        <div id="divImage">
+            <img src="" id=imgMoment alt="">
+        </div>
+        <span class="msgError image">File is not valid</span>
+        <label>Requeriments</label>
+        <input type="text" class="inputForm requeriments" formControlName="requerimentInput" placeholder="Requeriment">
+        <button (click)="pushRequeriment()" class="buttonForm" id="buttonRequeriment" type="button">Submit requeriment</button>
+        <span class="msgError requeriments">Requeriments is required</span>
+        <ul>
+            <li class="requerimentSpan" *ngFor="let i of requeriments">{{i}}</li>
+        </ul>
+        <input class="buttonForm" id="buttonSubmit" type="submit" value="Submit">
+    </form>
+</div>

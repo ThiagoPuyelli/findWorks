@@ -12,9 +12,15 @@ export class ModifyWorksService {
   ) { }
 
   saveWork(body: any) {
-    const token: any = sessionStorage.getItem("x-access-token")
+    const token: any = sessionStorage.getItem("x-access-token");
     let headers = new HttpHeaders().set("x-access-token", token);
     return this.http.post(environment.uri + "/works", body, {headers})
+  }
+
+  deleteWork(id: string){
+    const token: any = sessionStorage.getItem("x-access-token");
+    let headers: HttpHeaders = new HttpHeaders().set("x-access-token", token);
+    return this.http.delete(environment.uri + "/works/" + id, {headers});
   }
 
 }

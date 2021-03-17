@@ -4,7 +4,7 @@
     width: 80%;
     margin: 0 auto;
     margin-top: 20px;
-    height: 500px;
+    height: 600px;
 }
 
 #imageTitle{
@@ -69,4 +69,12 @@
 
 .buttonSend:hover{
     background-color: rgb(91, 223, 91);
+}
+
+.buttonSend.delete{
+    background-color: rgb(241, 81, 81);
+}
+
+.buttonSend.delete:hover {
+    background-color: rgb(238, 27, 27);
 }

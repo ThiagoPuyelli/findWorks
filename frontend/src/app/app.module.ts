@@ -14,6 +14,7 @@ import { HomeAuthComponent } from './components/home-auth/home-auth.component';
 import { ConsultsComponent } from './pages/consults/consults.component';
 import { AddWorkComponent } from './pages/add-work/add-work.component';
 import { WorksListComponent } from './pages/works-list/works-list.component';
+import { UpdateWorkComponent } from './pages/update-work/update-work.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { WorksListComponent } from './pages/works-list/works-list.component';
     HomeAuthComponent,
     ConsultsComponent,
     AddWorkComponent,
-    WorksListComponent
+    WorksListComponent,
+    UpdateWorkComponent
   ],
   imports: [
     BrowserModule,
