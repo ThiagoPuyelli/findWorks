@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private builder: FormBuilder,
-    private registerService: RegisterService
+    private registerService: RegisterService,
   ) {
     this.dataForm = this.builder.group({
       name: ["", Validators.required],
@@ -62,8 +62,11 @@ export class RegisterComponent implements OnInit {
         }
 
         this.registerService.registerUser(userSend).subscribe(
-          result => {
-            console.log(result);
+          (result: any) => {
+            if(result.auth){
+              sessionStorage.setItem("x-access-token", result.token);
+              location.reload();
+            }
           },
           err => {
             console.log(err);
@@ -93,6 +96,7 @@ export class RegisterComponent implements OnInit {
     } else {
       msgError.style.display = "none";
       const src = URL.createObjectURL(this.imageFile);
+      console.log(src)
       img.setAttribute("src", src);
       closeImg.style.display = "block";
     }

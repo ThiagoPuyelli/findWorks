@@ -148,6 +148,7 @@ var updateWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     work[i] = req.body[i];
                 }
             }
+            work.requeriments = work.requeriments[0].split("-");
             if (req.file) {
                 const destroyImage = yield cloudinary_1.v2.uploader.destroy(work.public_id);
                 if (!destroyImage)

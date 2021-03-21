@@ -72,6 +72,23 @@ label{
     max-width: 600px;
 }
 
+.deleteRequeriment {
+    margin-left: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 300ms all;
+    width: 60px;
+    height: 40px;
+    background-color: #eee;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.deleteRequeriment:hover {
+    transform: scale(1.2, 1.2);
+    color: red;
+}
+
 #divImage{
     width: 300px;
     border: 1px solid black;

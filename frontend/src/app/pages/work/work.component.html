@@ -12,8 +12,8 @@
                     <p>{{work.location}}</p>
                 </div>
                 <div>
-                    <img *ngIf="work.locationwork == 'presencial'" src="../../../assets/img/office.svg" alt="">
-                    <img *ngIf="work.locationwork == 'home'" src="../../../assets/img/work-from-home.svg" alt="">
+                    <img *ngIf="work.locationwork == 'Presential'" src="../../../assets/img/office.svg" alt="">
+                    <img *ngIf="work.locationwork == 'Home office'" src="../../../assets/img/work-from-home.svg" alt="">
                     <p>{{work.locationwork}}</p>
                 </div>
                 <div>
@@ -31,7 +31,9 @@
         </p>
         <div id="requeriments">
             <h1>Requeriments</h1>
-            <p>{{work.requeriments}}</p>
+            <ul id="listRequeriments" *ngIf="this.work">
+                <li class="requerimentList" *ngFor="let i of this.work.requeriments">{{i}}</li>
+            </ul>
         </div>
     </div>
 

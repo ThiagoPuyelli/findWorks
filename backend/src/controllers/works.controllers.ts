@@ -126,6 +126,7 @@ export var updateWork = async (req: Request, res: Response) => {
                     work[i] = req.body[i];
                 }
             }
+            work.requeriments = work.requeriments[0].split("-");
     
             if(req.file){
                 const destroyImage = await v2.uploader.destroy(work.public_id);

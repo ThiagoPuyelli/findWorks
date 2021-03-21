@@ -22,7 +22,6 @@ export class HomeAuthComponent implements OnInit {
     this.getUser.findUser().subscribe(
       result => {
           this.user = result;
-          console.log(this.user)
       },
       err => console.log(err)
     )

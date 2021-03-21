@@ -38,7 +38,6 @@ export class WorkComponent implements OnInit, AfterViewInit {
             const token: any = sessionStorage.getItem("x-access-token");
             if(token){
               const userID: any = token.split("|")[2];
-              console.log(userID)
               if(userID == this.work.userID + "") this.owner = true;
             }
           },

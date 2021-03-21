@@ -23,4 +23,11 @@ export class ModifyWorksService {
     return this.http.delete(environment.uri + "/works/" + id, {headers});
   }
 
+  updateWork(body: any, id: string){
+    console.log(id)
+    const token: any = sessionStorage.getItem("x-access-token");
+    let headers: HttpHeaders = new HttpHeaders().set("x-access-token", token);
+    return this.http.put(environment.uri + "/works/" + id, body, {headers});
+  }
+
 }

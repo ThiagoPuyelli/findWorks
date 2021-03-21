@@ -78,8 +78,8 @@ export class AddWorkComponent implements OnInit {
     if(this.dataForm.status == "VALID"){
       const { title, description, category, location, locationwork, time, requeriments } = this.dataForm.value;
       const requerimentsString = requeriments.join("-");
-      const work = new Work(title, description, category, location, locationwork, time, requerimentsString);
-
+      const work = {title, description, category, location, locationwork, time, requerimentsString};
+      
       if(work) {
         var dataSend;
         if(this.imageFile){
@@ -93,6 +93,7 @@ export class AddWorkComponent implements OnInit {
         } else {
           dataSend = work;
         }
+
 
         if(dataSend){
           this.modifyWorks.saveWork(dataSend).subscribe(
@@ -116,6 +117,14 @@ export class AddWorkComponent implements OnInit {
             span.style.display = "block";
           }
         }
+      }
+    }
+  }
+
+  deleteRequeriment(requeriment: string){
+    for(let i in this.requeriments){
+      if(this.requeriments[i] == requeriment) {
+        this.requeriments.splice(parseInt(i), 1);
       }
     }
   }

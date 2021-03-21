@@ -17,7 +17,7 @@ export class UpdateWorkComponent implements OnInit {
   public requeriments: Array<string> = [];
   public dataForm: FormGroup;
   public imageFile: File|undefined = undefined;
-  private work: any = {
+  public work: any = {
     title: "",
     description: "",
     category: "",
@@ -60,6 +60,7 @@ export class UpdateWorkComponent implements OnInit {
             work => {
               this.work = work;
               if(this.work){
+                this.requeriments = this.work.requeriments;
                 for(let i in this.work){
                   this.dataForm.get(i)?.setValue(this.work[i]);
                   if(i == "locationwork" || i == "time" || i == "category"){
@@ -74,6 +75,14 @@ export class UpdateWorkComponent implements OnInit {
       },
       err => console.log(err)
     )
+  }
+
+  deleteRequeriment(requeriment: string){
+    for(let i in this.requeriments){
+      if(this.requeriments[i] == requeriment) {
+        this.requeriments.splice(parseInt(i), 1);
+      }
+    }
   }
 
   changeInput(clase: string){
@@ -114,8 +123,8 @@ export class UpdateWorkComponent implements OnInit {
     if(this.dataForm.status == "VALID"){
       const { title, description, category, location, locationwork, time, requeriments } = this.dataForm.value;
       const requerimentsString = requeriments.join("-");
-      const work = new Work(title, description, category, location, locationwork, time, requerimentsString);
-
+      const work = {title, description, category, location, locationwork, time, requeriments: requerimentsString};
+      
       if(work) {
         var dataSend;
         if(this.imageFile){
@@ -131,7 +140,7 @@ export class UpdateWorkComponent implements OnInit {
         }
 
         if(dataSend){
-          this.modifyWorks.saveWork(dataSend).subscribe(
+          this.modifyWorks.updateWork(dataSend, this.work._id).subscribe(
             result => {
                 this.router.navigate(["/works-user"]);
             },

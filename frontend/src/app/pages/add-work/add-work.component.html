@@ -38,7 +38,7 @@
         <button (click)="pushRequeriment()" class="buttonForm" id="buttonRequeriment" type="button">Submit requeriment</button>
         <span class="msgError requeriments">Requeriments is required</span>
         <ul>
-            <li class="requerimentSpan" *ngFor="let i of requeriments">{{i}}</li>
+            <li class="requerimentSpan" *ngFor="let i of requeriments">{{i}} <button class="deleteRequeriment" (click)="deleteRequeriment(i)">X</button></li>
         </ul>
         <input class="buttonForm" id="buttonSubmit" type="submit" value="Submit">
     </form>
