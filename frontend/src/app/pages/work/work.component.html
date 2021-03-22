@@ -39,6 +39,7 @@
 
     <button class="buttonSend" *ngIf="owner" [routerLink]="['/update-work/' + workID]">Update Work</button>
     <button class="buttonSend delete" (click)="deleteWork()" *ngIf="owner">Delete Work</button>
-    <button class="buttonSend" *ngIf="!owner">Send Consult</button>
+    <button class="buttonSend" *ngIf="!owner && !formConsult" (click)="displayForm()">Send Consult</button>
+    <app-send-consult workID="{{work._id}}" *ngIf="formConsult" userID="{{work.userID}}"></app-send-consult>
 
 </div>

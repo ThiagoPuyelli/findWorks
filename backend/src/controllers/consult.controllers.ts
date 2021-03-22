@@ -6,20 +6,27 @@ export var saveConsult = async (req: Request, res: Response) => {
     const userToConsult = await User.findById(req.params.id);
 
     if(userToConsult){
-        userToConsult.consults.push({...req.body, workID: req.params.workID});
-        if(userToConsult){
-            const userUpdate = await User.findByIdAndUpdate(userToConsult._id, userToConsult, {new: true});
-            if(userUpdate){
-                res.json(userUpdate);
+        const work = await Work.findById(req.params.workID);
+        if(work){
+            userToConsult.consults.push({...req.body, workID: req.params.workID});
+            if(userToConsult){
+                const userUpdate = await User.findByIdAndUpdate(userToConsult._id, userToConsult, {new: true});
+                if(userUpdate){
+                    res.json(userUpdate);
+                } else {
+                    res.json({
+                        error: "Los datos no fueron modificados correctamente"
+                    });
+                }
             } else {
                 res.json({
-                    error: "Los datos no fueron modificados correctamente"
+                    error: "Los datos no son válidos"
                 });
             }
         } else {
             res.json({
-                error: "Los datos no son válidos"
-            });
+                error: "El id del trabajo no es válido"
+            })
         }
     } else {
         res.json({

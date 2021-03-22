@@ -13,6 +13,7 @@ export class WorkComponent implements OnInit, AfterViewInit {
   public work: any; 
   public owner: boolean = false;
   public workID: string = "";
+  public formConsult: boolean = false;
 
   constructor(
     private getWorks: GetWorksService,
@@ -54,6 +55,10 @@ export class WorkComponent implements OnInit, AfterViewInit {
       },
       err => console.log(err)
     )
+  }
+
+  displayForm(){
+    this.formConsult = true;
   }
 
 }

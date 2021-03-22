@@ -1,0 +1,80 @@
+#consultDiv{
+    display: flex;
+    flex-flow: column wrap;
+    margin: 20px;
+    align-items: center;
+}
+
+#formConsult{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+input,
+textarea {
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 3px #ccc;
+}
+
+input{
+    width: 300px;
+    padding: 10px;
+}
+
+textarea {
+    width: 500px;
+    height: 200px;
+    padding: 20px;
+}
+
+h2{
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+.buttonConsult{
+    border: none;
+    height: 60px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px #ccc;
+    cursor: pointer;
+    color: white;
+    font-size: 25px;
+    transition: 300ms all;
+}
+
+#buttonSubmit{
+    background-color: rgb(7, 194, 7);
+}
+
+#buttonSubmit:hover{
+    background-color: green;
+}
+
+#buttonData{
+    background-color: rgb(0, 228, 228);
+}
+
+#buttonData:hover{
+    background-color: rgb(7, 184, 184);
+}
+
+.data{
+    margin: 20px;
+    margin-bottom: 0px;
+    max-width: 300px;
+}
+
+.data p{
+    margin: 10px;
+    font-size: 18px;
+}
+
+#verifySendDiv h1{
+    text-align: center;
+    margin-top: 40px;
+    color: rgb(4, 161, 4);
+}

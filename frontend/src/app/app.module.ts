@@ -15,6 +15,7 @@ import { ConsultsComponent } from './pages/consults/consults.component';
 import { AddWorkComponent } from './pages/add-work/add-work.component';
 import { WorksListComponent } from './pages/works-list/works-list.component';
 import { UpdateWorkComponent } from './pages/update-work/update-work.component';
+import { SendConsultComponent } from './components/send-consult/send-consult.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { UpdateWorkComponent } from './pages/update-work/update-work.component';
     ConsultsComponent,
     AddWorkComponent,
     WorksListComponent,
-    UpdateWorkComponent
+    UpdateWorkComponent,
+    SendConsultComponent
   ],
   imports: [
     BrowserModule,

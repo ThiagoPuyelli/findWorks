@@ -1,0 +1,24 @@
+<div id=consultDiv *ngIf="!verifySend">
+    <h1>Consult</h1>
+    <form (submit)="submitConsult()" id=formConsult [formGroup]="dataForm">
+        <input formControlName="title" type="text" placeholder="Title">
+        <textarea formControlName="description" placeholder="Description"></textarea>
+        <input formControlName="phone" type="text" placeholder="Phone">
+        <input formControlName="email" type="email" placeholder="Email">
+        <h2>Other data</h2>
+        <input type="text" formControlName="otherTitle" placeholder="Title">
+        <input type="text" formControlName="otherData" placeholder="Data">
+        <div id=datas>
+            <div class=data *ngFor="let i of this.dataForm.value.otherDatas">
+                <p><b>title: </b>{{i.title}}</p>
+                <p><b>data: </b>{{i.data}}</p>
+            </div>
+        </div>
+        <input type="button" value="Add Data" class="buttonConsult" (click)="pushOtherData()" id=buttonData>
+        <input type="submit" value="Submit" class="buttonConsult" id=buttonSubmit>
+    </form>
+</div>
+
+<div id=verifySendDiv *ngIf="verifySend">
+    <h1>✔ Consult send successfully</h1>
+</div>

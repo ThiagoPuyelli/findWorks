@@ -14,24 +14,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteConsult = exports.getConsult = exports.getConsults = exports.saveConsult = void 0;
 const User_models_1 = __importDefault(require("../models/User.models"));
+const Work_models_1 = __importDefault(require("../models/Work.models"));
 var saveConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userToConsult = yield User_models_1.default.findById(req.params.id);
     if (userToConsult) {
-        userToConsult.consults.push(Object.assign(Object.assign({}, req.body), { workID: req.params.workID }));
-        if (userToConsult) {
-            const userUpdate = yield User_models_1.default.findByIdAndUpdate(userToConsult._id, userToConsult, { new: true });
-            if (userUpdate) {
-                res.json(userUpdate);
+        const work = yield Work_models_1.default.findById(req.params.workID);
+        if (work) {
+            userToConsult.consults.push(Object.assign(Object.assign({}, req.body), { workID: req.params.workID }));
+            if (userToConsult) {
+                const userUpdate = yield User_models_1.default.findByIdAndUpdate(userToConsult._id, userToConsult, { new: true });
+                if (userUpdate) {
+                    res.json(userUpdate);
+                }
+                else {
+                    res.json({
+                        error: "Los datos no fueron modificados correctamente"
+                    });
+                }
             }
             else {
                 res.json({
-                    error: "Los datos no fueron modificados correctamente"
+                    error: "Los datos no son válidos"
                 });
             }
         }
         else {
             res.json({
-                error: "Los datos no son válidos"
+                error: "El id del trabajo no es válido"
             });
         }
     }
