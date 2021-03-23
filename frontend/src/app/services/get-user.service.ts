@@ -15,4 +15,9 @@ export class GetUserService {
     const token: any = sessionStorage.getItem("x-access-token");
     return this.http.get(environment.uri + "/users/" + token.split("|")[2]);
   }
+  
+  findUserPublic(id: string){
+    return this.http.get(environment.uri + "/users/" + id);
+  }
+
 }

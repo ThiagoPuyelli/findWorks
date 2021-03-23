@@ -45,6 +45,21 @@
     height: 35px;
 }
 
+#linkProfile {
+    display: block;
+    color: var(--blue);
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: -10px;
+    cursor: pointer;
+    width: 85px; 
+}
+
+#linkProfile:hover{
+    color: var(--green);
+    text-decoration: underline;
+}
+
 #dataForWork{
     display: flex;
     flex-flow: row wrap;

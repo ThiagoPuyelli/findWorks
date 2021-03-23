@@ -1,0 +1,48 @@
+#consults{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.consult {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    width: 60%;
+    cursor: pointer;
+    transition: 300ms all; 
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.consult:hover {
+    background-color: #eee;
+}
+
+.title{
+    margin: 20px;
+    font-size: 30px;
+}
+
+#spans {
+    display: flex;
+    flex-flow: row wrap;
+    width: 340px;
+}
+
+.span {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    margin: 10px;
+}
+
+.span img{
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+}
+
+.span.email{
+    font-size: 18px;
+}

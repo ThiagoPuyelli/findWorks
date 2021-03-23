@@ -1,7 +1,7 @@
 <div *ngIf="!auth" class="homeNoAuth">
     <div id=containerNoAuth>
         <div id="lateral-bar">
-            <h3>Categorías</h3>
+            <h3>Categories</h3>
             <label class="labelInput" *ngFor="let i of categories">
                 <input type="checkbox" (click)="changeCategory(i)" value="{{i}}" id="{{i}}">{{i}}
             </label>

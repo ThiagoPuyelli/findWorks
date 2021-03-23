@@ -21,6 +21,7 @@
                     <p>{{work.category}}</p>
                 </div>
             </div>
+            <a id="linkProfile" [routerLink]="['/profile/' + user._id]" *ngIf="user">{{user.name}} {{user.lastname}}</a>
         </div>
         <img src="{{work.image}}" alt="">
     </div>

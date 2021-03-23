@@ -9,6 +9,7 @@ import { ConsultsService } from "../../services/consults.service";
 export class ConsultsComponent implements OnInit {
 
   public consults: Array<any> = [];
+  public titles: Array<string> = ["pepe", "don gato"]
 
   constructor(
     private consultsService: ConsultsService

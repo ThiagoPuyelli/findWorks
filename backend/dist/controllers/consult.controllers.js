@@ -76,14 +76,20 @@ var getConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield User_models_1.default.findById(token.split("|")[2]);
     if (user) {
         if (user.consults.length > 0) {
+            var consult;
             for (let i of user.consults) {
                 if (i._id + "" == req.params.id) {
-                    res.json(i);
+                    consult = i;
                 }
             }
-            res.json({
-                error: "No se encontro la consulta"
-            });
+            if (consult) {
+                res.json(consult);
+            }
+            else {
+                res.json({
+                    error: "No se encontro la consulta"
+                });
+            }
         }
         else {
             res.json({

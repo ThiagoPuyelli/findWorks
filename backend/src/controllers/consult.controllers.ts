@@ -58,14 +58,20 @@ export var getConsult = async (req: Request, res: Response) => {
     const user = await User.findById(token.split("|")[2]);
     if(user){
         if(user.consults.length > 0){
+            var consult;
             for(let i of user.consults){
                 if(i._id + "" == req.params.id){
-                    res.json(i);
+                    consult = i;
                 }
             }
-            res.json({
-                error: "No se encontro la consulta"
-            })
+
+            if(consult){
+                res.json(consult);
+            } else {
+                res.json({
+                    error: "No se encontro la consulta"
+                })
+            }
         } else {
             res.json({
                 error: "No hay ninguna consulta"

@@ -1,5 +1,9 @@
 <div id=consults *ngIf="consults.length > 0">
-    <div class="consult" *ngFor="let i of consults">
-        
+    <div class="consult" *ngFor="let i of consults" [routerLink]="['/consults/' + i._id]">
+        <h2 class="title">{{i.title}}</h2>
+        <div id="spans">
+            <p class="span phone"><img src="../../../assets/img/phone-call.svg" alt=""> {{i.phone}}</p>
+            <p class="span email"><img src="../../../assets/img/correo-electronico.svg" alt=""> {{i.email}}</p>
+        </div>
     </div>
 </div>

@@ -16,6 +16,8 @@ import { AddWorkComponent } from './pages/add-work/add-work.component';
 import { WorksListComponent } from './pages/works-list/works-list.component';
 import { UpdateWorkComponent } from './pages/update-work/update-work.component';
 import { SendConsultComponent } from './components/send-consult/send-consult.component';
+import { ConsultComponent } from './pages/consult/consult.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { SendConsultComponent } from './components/send-consult/send-consult.com
     AddWorkComponent,
     WorksListComponent,
     UpdateWorkComponent,
-    SendConsultComponent
+    SendConsultComponent,
+    ConsultComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

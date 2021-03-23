@@ -23,4 +23,12 @@ export class ConsultsService {
     }
   }
 
+  getConsult(id: string): any {
+    const token: string|null = sessionStorage.getItem("x-access-token");
+    if(token) {
+      let headers = new HttpHeaders().set("x-access-token", token);
+      return this.http.get(environment.uri + "/consults/" + id, {headers});
+    }
+  }
+
 }

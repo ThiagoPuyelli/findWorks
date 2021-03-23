@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { GetWorksService } from "../../services/get-works.service";
+import { GetUserService } from "../../services/get-user.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ModifyWorksService } from "../../services/modify-works.service";
 
@@ -14,11 +15,13 @@ export class WorkComponent implements OnInit, AfterViewInit {
   public owner: boolean = false;
   public workID: string = "";
   public formConsult: boolean = false;
+  public user: any;
 
   constructor(
     private getWorks: GetWorksService,
     private route: ActivatedRoute,
     private modifyWorks: ModifyWorksService,
+    private getUserService: GetUserService,
     private router: Router
   ) { }
 
@@ -35,6 +38,7 @@ export class WorkComponent implements OnInit, AfterViewInit {
         this.getWorks.findWork(result.id).subscribe(
           work => {
             this.work = work;
+            this.getUser(this.work.userID);
             this.workID = result.id;
             const token: any = sessionStorage.getItem("x-access-token");
             if(token){
@@ -46,6 +50,17 @@ export class WorkComponent implements OnInit, AfterViewInit {
         )
       }
     )
+  }
+
+  getUser(id: string){
+      this.getUserService.findUserPublic(id).subscribe(
+        result => {
+          this.user = result;
+        },
+        err => {
+          console.log(err);
+        }
+      )
   }
 
   deleteWork(){

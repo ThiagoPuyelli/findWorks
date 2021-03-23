@@ -1,0 +1,19 @@
+<div id="content">
+    <div id="header" *ngIf="consult">
+        <h1 id=title >{{consult.title}}</h1>
+        <div id="spans">
+            <div class="span email">
+                <img src="../../../assets/img/correo-electronico.svg" alt="">
+                {{consult.email}}
+            </div>
+            <div class="span phone">
+                <img src="../../../assets/img/phone-call.svg" alt="">
+                {{consult.phone}}
+            </div>
+        </div>
+        <div class="otherData" *ngFor="let i of consult.otherData">
+            <p class="span data"><b>{{i.title}}:</b>{{i.data}}</p>
+        </div>
+    </div>
+    <p id="description">{{consult.description}}</p>
+</div>
