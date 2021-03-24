@@ -38,6 +38,7 @@ export class WorkComponent implements OnInit, AfterViewInit {
         this.getWorks.findWork(result.id).subscribe(
           work => {
             this.work = work;
+            console.log(this.work)
             this.getUser(this.work.userID);
             this.workID = result.id;
             const token: any = sessionStorage.getItem("x-access-token");

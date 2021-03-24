@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-    setTimeout(() => {console.log(this.user)}, 1000)
+    setTimeout(() => {console.log(this.user, this.owner)}, 1000)
   }
 
   getUser(){
