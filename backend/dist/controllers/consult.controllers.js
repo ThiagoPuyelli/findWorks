@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteConsult = exports.getConsult = exports.getConsults = exports.saveConsult = void 0;
 const User_models_1 = __importDefault(require("../models/User.models"));
 const Work_models_1 = __importDefault(require("../models/Work.models"));
-var saveConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.saveConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userToConsult = yield User_models_1.default.findById(req.params.id);
     if (userToConsult) {
         const work = yield Work_models_1.default.findById(req.params.workID);
@@ -50,8 +50,7 @@ var saveConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.saveConsult = saveConsult;
-var getConsults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getConsults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var token = req.headers["x-access-token"];
     const user = yield User_models_1.default.findById(token.split("|")[2]);
     if (user) {
@@ -59,9 +58,7 @@ var getConsults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             res.json(user.consults);
         }
         else {
-            res.json({
-                error: "No se encuentran consultas"
-            });
+            res.json([]);
         }
     }
     else {
@@ -70,8 +67,7 @@ var getConsults = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.getConsults = getConsults;
-var getConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var token = req.headers["x-access-token"];
     const user = yield User_models_1.default.findById(token.split("|")[2]);
     if (user) {
@@ -98,8 +94,7 @@ var getConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
     }
 });
-exports.getConsult = getConsult;
-var deleteConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var token = req.headers["x-access-token"];
     const user = yield User_models_1.default.findById(token.split("|")[2]);
     if (user) {
@@ -133,4 +128,3 @@ var deleteConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         });
     }
 });
-exports.deleteConsult = deleteConsult;

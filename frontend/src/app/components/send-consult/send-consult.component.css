@@ -78,3 +78,21 @@ h2{
     margin-top: 40px;
     color: rgb(4, 161, 4);
 }
+
+.deleteConsult {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 4px #ccc;
+    margin: 0 auto;
+    transition: 300ms all; 
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.deleteConsult:hover {
+    color: red;
+    transform: scale(1.2, 1.2);
+}

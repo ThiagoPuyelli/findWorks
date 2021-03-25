@@ -11,6 +11,7 @@ export class WorksComponent implements OnInit {
   @Input() page: any;
   @Input() category: any;
   @Input() user: string|undefined;
+  @Input() id: string|undefined;
 
   public works: Array<any>;
 
@@ -42,13 +43,24 @@ export class WorksComponent implements OnInit {
         }
       )
     } else if(this.user == "true") {
-      this.getWorks.findWorksUser().subscribe(
-        (result: any) => {
-          for(let i of result){
-            this.works.push(i);
-          }
-        }
-      )
+      if(this.id){
+          this.getWorks.findWorksUserPublic(this.id).subscribe(
+            (works: any) => {
+              for (let i of works) this.works.push(i); 
+            },
+            err => console.log(err)
+          )
+      } else {
+
+        this.getWorks.findWorksUser().subscribe(
+          (result: any) => {
+            for(let i of result){
+              this.works.push(i);
+            }
+          },
+          err => console.log(err)
+        )
+      }
     } else {
       this.getWorks.findWorks(this.page).subscribe(
         (result: any) => {

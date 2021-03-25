@@ -12,6 +12,7 @@
             <div class=data *ngFor="let i of this.dataForm.value.otherDatas">
                 <p><b>title: </b>{{i.title}}</p>
                 <p><b>data: </b>{{i.data}}</p>
+                <button type="button" class="deleteConsult" (click)="deleteRequeriment(i.title, i.data)">X</button>
             </div>
         </div>
         <input type="button" value="Add Data" class="buttonConsult" (click)="pushOtherData()" id=buttonData>

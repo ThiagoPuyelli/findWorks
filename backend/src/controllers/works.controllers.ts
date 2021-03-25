@@ -20,6 +20,9 @@ export var saveWork = async (req: Request, res: Response) => {
                     error: "Esa categoría no existe"
                 });
             }
+        } else if(i == "requeriments") {
+            const requerimentsArray: Array<string> = req.body.requeriments.split("-");
+            work.requeriments = requerimentsArray;
         } else {
             work[i] = req.body[i];
         }
@@ -219,8 +222,14 @@ export var getWorksCategory = async (req: Request, res: Response) => {
 }
 
 export var getWorksUser = async (req: Request, res: Response) => {
-    const token: any = req.headers["x-access-token"];
-    const works = await Work.find({userID: token.split("|")[2]});
+    var id: string;
+    if(req.params.id){
+        id = req.params.id;
+    } else {
+        const token: any = req.headers["x-access-token"];
+        id = token.split("|")[2];
+    }
+    const works = await Work.find({userID: id});
     if(works){
         works.sort((a: any, b: any) => {
             new Date(a.date).getTime() > new Date(b.date).getTime();

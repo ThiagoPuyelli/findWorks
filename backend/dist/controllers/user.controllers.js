@@ -20,7 +20,7 @@ const comparePassword_methods_1 = __importDefault(require("../methods/comparePas
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const cloudinary_1 = require("cloudinary");
-var register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userEmail = yield User_models_1.default.findOne({ email: req.body.email });
     if (!userEmail) {
         const newUser = new User_models_1.default();
@@ -79,8 +79,7 @@ var register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.register = register;
-var login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     const user = yield User_models_1.default.findOne({ email });
     if (user) {
@@ -109,8 +108,7 @@ var login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.login = login;
-var getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield User_models_1.default.find();
     if (users) {
         res.json(users);
@@ -121,8 +119,7 @@ var getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.getUsers = getUsers;
-var getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield User_models_1.default.findById(req.params.id);
     if (user) {
         res.json(user);
@@ -133,8 +130,7 @@ var getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.getUser = getUser;
-var deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var user;
     if (req.params.id) {
         user = yield User_models_1.default.findById(req.params.id);
@@ -169,8 +165,7 @@ var deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.deleteUser = deleteUser;
-var updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var userToUpdate;
     if (req.params.id) {
         userToUpdate = yield User_models_1.default.findById(req.params.id);
@@ -211,6 +206,4 @@ var updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.updateUser = updateUser;
-var verifyToken = (req, res) => res.json({ auth: true });
-exports.verifyToken = verifyToken;
+exports.verifyToken = (req, res) => res.json({ auth: true });

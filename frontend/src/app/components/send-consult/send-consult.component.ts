@@ -42,7 +42,6 @@ export class SendConsultComponent implements OnInit {
   }
 
   submitConsult(){
-    console.log(this.dataForm)
     if(this.dataForm.status == "VALID"){
       const { email, description, title, otherDatas, phone } = this.dataForm.value;
       const dataSend = {
@@ -60,6 +59,17 @@ export class SendConsultComponent implements OnInit {
           console.log(err);
         }
       )
+    }
+  }
+
+  deleteRequeriment(title: string, data: string){
+    if(title != "" && data != "") {
+      const value = this.dataForm.value;
+      for(let i in this.dataForm.value.otherDatas){
+          if(value.otherDatas[i].title = title && value.otherDatas[i].data == data) {
+            value.otherDatas.splice(i, 1);
+          }
+      }
     }
   }
 

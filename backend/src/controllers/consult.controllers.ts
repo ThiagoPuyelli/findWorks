@@ -42,9 +42,7 @@ export var getConsults = async (req: Request, res: Response) => {
         if(user.consults.length > 0){
             res.json(user.consults);
         } else {
-            res.json({
-                error: "No se encuentran consultas"
-            })
+            res.json([]);
         }
     } else {
         res.json({

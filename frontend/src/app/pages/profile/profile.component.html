@@ -1,3 +1,14 @@
-<div id="content">
-    
+<div id="content" *ngIf=user>
+    <div id="header">
+        <div id="avatarName">
+            <h1 id="name">{{user.name + " " + user.lastname}}</h1>
+            <img src="{{user.image}}" alt="">
+        </div>
+        <p id="description">{{user.description}}</p>
+    </div>
+    <a id="linkModify" *ngIf="owner" [routerLink]="['/modify-profile/' + this.user._id]">Modify User</a>
+    <h1 id="titleWorks">Works</h1>
+    <div id="works">
+        <app-works id="{{user._id}}" user="true"></app-works>
+    </div>
 </div>

@@ -11,6 +11,7 @@ router.put("/works/:id", verifyTokenUser, multer.single("image"), updateWork);
 router.delete("/works/:id", verifyTokenUser, deleteWork);
 router.get("/works-categories/:categories/:page", getWorksCategory);
 router.get("/works-user", verifyTokenUser, getWorksUser);
+router.get("/works-user/:id", getWorksUser);
 router.get("/categories", getCategories);
 router.get("/pages", getQuantityPages);
 router.get("/pages/:category", getQuantityPagesCategory);

@@ -36,5 +36,9 @@ export class GetWorksService {
     let headers = new HttpHeaders().set("x-access-token", token);
     return this.http.get(environment.uri + "/works-user", {headers})
   }
+
+  findWorksUserPublic(id: string){
+    return this.http.get(environment.uri + "/works-user/" + id);
+  }
   
 }

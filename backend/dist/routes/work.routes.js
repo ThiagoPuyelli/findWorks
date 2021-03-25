@@ -15,6 +15,7 @@ router.put("/works/:id", verifyTokenUser_1.default, multer_middlewares_1.default
 router.delete("/works/:id", verifyTokenUser_1.default, works_controllers_1.deleteWork);
 router.get("/works-categories/:categories/:page", works_controllers_1.getWorksCategory);
 router.get("/works-user", verifyTokenUser_1.default, works_controllers_1.getWorksUser);
+router.get("/works-user/:id", works_controllers_1.getWorksUser);
 router.get("/categories", works_controllers_1.getCategories);
 router.get("/pages", works_controllers_1.getQuantityPages);
 router.get("/pages/:category", works_controllers_1.getQuantityPagesCategory);
