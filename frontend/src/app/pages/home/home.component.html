@@ -24,6 +24,10 @@
     </div>
 </div>
 
-<div *ngIf="auth" class="homeAuth">
+<div *ngIf="auth && !admin" class="homeAuth">
     <app-home-auth></app-home-auth>
+</div>
+
+<div *ngIf="auth && admin">
+    <app-home-admin></app-home-admin>
 </div>

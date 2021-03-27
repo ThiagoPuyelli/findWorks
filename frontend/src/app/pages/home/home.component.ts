@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class HomeComponent implements OnInit, AfterViewChecked {
 
   public auth: boolean;
+  public admin: boolean;
   public categories: Array<string>;
   public works: Array<any>;
   public page: number|undefined = undefined;
@@ -31,6 +32,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     this.categories = [];
     this.works = [];
     this.categoriesChecked = [];
+    this.admin = false;
     this.route.params.subscribe(
       result => {
         if(result.page){
@@ -76,6 +78,10 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     this.verifyCheckbox();
     if(this.verifyAuth.auth){
       this.auth = true;
+      const token: string|null = sessionStorage.getItem("x-access-token");
+      if(token && token.split("|")[0] == "1"){
+        this.admin = true;
+      }
     }
   }
 

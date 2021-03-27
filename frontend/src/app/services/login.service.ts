@@ -14,4 +14,9 @@ export class LoginService {
   login(body: any){
     return this.http.post(environment.uri + "/users/login", body);
   }
+
+  loginAdmin(body: any){
+    return this.http.post(environment.uri + "/admin/login", body);
+  }
+
 }

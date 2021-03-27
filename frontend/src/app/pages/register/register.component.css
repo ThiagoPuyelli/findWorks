@@ -152,3 +152,7 @@ button[type="submit"]:hover {
         width: 70%;
     }
 }
+
+.linkAdmin {
+    margin-bottom: 20px;
+}

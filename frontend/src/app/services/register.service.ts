@@ -15,4 +15,8 @@ export class RegisterService {
     return this.http.post(environment.uri + "/users/register", body);
   }
 
+  saveAdmin(body: any){
+    return this.http.post(environment.uri + "/admin", body);
+  }
+
 }

@@ -18,7 +18,7 @@ const comparePassword_methods_1 = __importDefault(require("../methods/comparePas
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const encryptPassword_methods_1 = __importDefault(require("../methods/encryptPassword.methods"));
 const Categories_models_1 = __importDefault(require("../models/Categories.models"));
-exports.saveAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+var saveAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     if (email && password) {
         const admin = new Admin_models_1.default();
@@ -40,7 +40,8 @@ exports.saveAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         });
     }
 });
-exports.login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.saveAdmin = saveAdmin;
+var login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     if (email && password) {
         const admin = yield Admin_models_1.default.findOne({ email });
@@ -77,7 +78,8 @@ exports.login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.adminUpdateEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.login = login;
+var adminUpdateEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { postEmail, email } = req.body;
     if (postEmail && email) {
         const { admin } = req.body;
@@ -97,7 +99,8 @@ exports.adminUpdateEmail = (req, res) => __awaiter(void 0, void 0, void 0, funct
         });
     }
 });
-exports.adminUpdatePassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.adminUpdateEmail = adminUpdateEmail;
+var adminUpdatePassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { postPassword, password } = req.body;
     if (postPassword && password) {
         const { admin } = req.body;
@@ -117,11 +120,13 @@ exports.adminUpdatePassword = (req, res) => __awaiter(void 0, void 0, void 0, fu
         });
     }
 });
-exports.deleteAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.adminUpdatePassword = adminUpdatePassword;
+var deleteAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const adminDelete = yield Admin_models_1.default.findByIdAndRemove(req.params.id);
     res.json(adminDelete);
 });
-exports.addCategorie = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteAdmin = deleteAdmin;
+var addCategorie = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { category } = req.body;
     if (category) {
         const categorie = new Categories_models_1.default();
@@ -142,3 +147,4 @@ exports.addCategorie = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
 });
+exports.addCategorie = addCategorie;

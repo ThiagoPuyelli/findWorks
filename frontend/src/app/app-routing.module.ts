@@ -13,6 +13,7 @@ import { AddWorkComponent } from './pages/add-work/add-work.component';
 import { UpdateWorkComponent } from './pages/update-work/update-work.component';
 import { ConsultComponent } from "./pages/consult/consult.component";
 import { ProfileComponent } from './pages/profile/profile.component';
+import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: "add-work", component: AddWorkComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
   { path: "update-work/:id", component: UpdateWorkComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
   { path: "consults/:id", component: ConsultComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
-  { path: "profile/:id", component: ProfileComponent}
+  { path: "profile/:id", component: ProfileComponent},
+  { path: "login-admin", component: LoginAdminComponent, canActivate: [NoAuthGuard], canLoad: [NoAuthGuard]},
 ];
 
 @NgModule({

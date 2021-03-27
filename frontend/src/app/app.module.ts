@@ -18,6 +18,8 @@ import { UpdateWorkComponent } from './pages/update-work/update-work.component';
 import { SendConsultComponent } from './components/send-consult/send-consult.component';
 import { ConsultComponent } from './pages/consult/consult.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
+import { HomeAdminComponent } from './components/home-admin/home-admin.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
     UpdateWorkComponent,
     SendConsultComponent,
     ConsultComponent,
-    ProfileComponent
+    ProfileComponent,
+    LoginAdminComponent,
+    HomeAdminComponent
   ],
   imports: [
     BrowserModule,

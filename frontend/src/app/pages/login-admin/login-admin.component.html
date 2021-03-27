@@ -1,5 +1,5 @@
 <div id="contentLogin">
-    <h1 id="titleLogin">Login</h1>
+    <h1 id="titleLogin">Login Admin</h1>
     <form (submit)="sendLogin()" [formGroup]="dataForm" id="loginForm">
         <label>Email</label>
         <input type="email" name="email" formControlName="email" placeholder=email>
@@ -9,5 +9,4 @@
         <span class="msgError noAuth">User is not exists</span>
         <button type=submit>Submit</button>
     </form>
-    <p>You are <a [routerLink]="['/login-admin']">administrator</a>?</p>
 </div>

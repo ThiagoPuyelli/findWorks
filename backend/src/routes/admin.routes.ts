@@ -12,5 +12,6 @@ router.post("/admin/login", login);
 router.put("/admin-email", verifyTokenAdmin, adminUpdateEmail);
 router.put("/admin-password", verifyTokenAdmin, adminUpdatePassword);
 router.post("/categories", verifyTokenAdmin, addCategorie);
+router.get("/admin/auth", verifyTokenAdmin, (req, res) => res.json({auth: true}));
 
 export default router;
