@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 
 @Injectable({
@@ -18,6 +18,26 @@ export class GetUserService {
   
   findUserPublic(id: string){
     return this.http.get(environment.uri + "/users/" + id);
+  }
+
+  findUsers(){
+    const token: string|null = sessionStorage.getItem("x-access-token");
+    if(token && token.split("|")[0] == "1"){
+        const headers: HttpHeaders = new HttpHeaders().set("x-access-token", token);
+        return this.http.get(environment.uri + "/users", {headers});
+    } else {
+      return undefined
+    }
+  }
+
+  findAdmins() {
+    const token: string|null = sessionStorage.getItem("x-access-token");
+    if(token && token.split("|")[0] == "1"){
+        const headers: HttpHeaders = new HttpHeaders().set("x-access-token", token);
+        return this.http.get(environment.uri + "/admin", {headers});
+    } else {
+      return undefined
+    }
   }
 
 }

@@ -1,0 +1,29 @@
+#users {
+    width: 90%;
+    margin: 0px auto;
+    margin-top: 30px;
+}
+
+.user {
+    display: flex;
+    flex-flow: row wrap;
+    width: calc(100% - 40px); 
+    padding: 20px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: 300ms all;
+}
+
+.user:hover {
+    background-color: #eee;
+}
+
+.user p {
+    display: block;
+    margin: 40px;
+    font-size: 25px;
+}
+
+.user img {
+    width: 200px;
+}

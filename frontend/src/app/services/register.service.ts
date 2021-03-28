@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,13 @@ export class RegisterService {
   }
 
   saveAdmin(body: any){
-    return this.http.post(environment.uri + "/admin", body);
+    const token: string|null = sessionStorage.getItem("x-access-token");
+    if(token && token.split("|")[0] == "1"){
+      const headers: HttpHeaders = new HttpHeaders().set("x-access-token", token);
+      return this.http.post(environment.uri + "/admin", body, {headers});
+    } else {
+      return this.http.post(environment.uri + "/admin", body);
+    }
   }
 
 }

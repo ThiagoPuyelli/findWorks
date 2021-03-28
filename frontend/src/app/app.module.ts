@@ -20,6 +20,9 @@ import { ConsultComponent } from './pages/consult/consult.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
 import { HomeAdminComponent } from './components/home-admin/home-admin.component';
+import { ListUsersComponent } from './pages/list-users/list-users.component';
+import { ListAdminsComponent } from './pages/list-admins/list-admins.component';
+import { SaveUserComponent } from './pages/save-user/save-user.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { HomeAdminComponent } from './components/home-admin/home-admin.component
     ConsultComponent,
     ProfileComponent,
     LoginAdminComponent,
-    HomeAdminComponent
+    HomeAdminComponent,
+    ListUsersComponent,
+    ListAdminsComponent,
+    SaveUserComponent
   ],
   imports: [
     BrowserModule,

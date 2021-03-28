@@ -11,6 +11,7 @@ const verifyTokenAdmin_1 = __importDefault(require("../middlewares/verifyTokenAd
 router.put("/admin-users/:id", verifyTokenAdmin_1.default, user_controllers_1.updateUser);
 router.delete("/admin-users/:id", verifyTokenAdmin_1.default, user_controllers_1.deleteUser);
 router.get("/users", verifyTokenAdmin_1.default, user_controllers_1.getUsers);
+router.get("/admin", verifyTokenAdmin_1.default, admin_controllers_1.getAdmins);
 router.post("/admin", verifyTokenAdmin_1.default, admin_controllers_1.saveAdmin);
 router.post("/admin/login", admin_controllers_1.login);
 router.put("/admin-email", verifyTokenAdmin_1.default, admin_controllers_1.adminUpdateEmail);

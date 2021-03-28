@@ -14,6 +14,9 @@ import { UpdateWorkComponent } from './pages/update-work/update-work.component';
 import { ConsultComponent } from "./pages/consult/consult.component";
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
+import { ListAdminsComponent } from './pages/list-admins/list-admins.component';
+import { ListUsersComponent } from './pages/list-users/list-users.component';
+import { SaveUserComponent } from './pages/save-user/save-user.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
@@ -30,6 +33,9 @@ const routes: Routes = [
   { path: "consults/:id", component: ConsultComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
   { path: "profile/:id", component: ProfileComponent},
   { path: "login-admin", component: LoginAdminComponent, canActivate: [NoAuthGuard], canLoad: [NoAuthGuard]},
+  { path: "list-admins", component: ListAdminsComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
+  { path: "list-users", component: ListUsersComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
+  { path: "save-admin", component: SaveUserComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]}
 ];
 
 @NgModule({

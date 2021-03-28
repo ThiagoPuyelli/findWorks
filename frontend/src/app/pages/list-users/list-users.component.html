@@ -1,0 +1,7 @@
+<div id="users">
+    <div class="user" *ngFor="let i of users" [routerLink]="['/profile/' + i._id]">
+        <img src="{{i.image}}" alt="">
+        <p id="name">{{i.name + " " + i.lastname}}</p>
+        <p id="email">{{i.email}}</p>
+    </div>
+</div>

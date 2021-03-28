@@ -31,6 +31,8 @@ export var saveAdmin = async (req: Request, res: Response) => {
     
 }
 
+export var getAdmins = async (req: Request, res: Response) => res.json(await Admin.find());
+
 export var login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
     if(email && password){

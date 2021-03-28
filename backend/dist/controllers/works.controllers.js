@@ -20,7 +20,7 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const cloudinary_1 = require("cloudinary");
 const separeWorks_1 = __importDefault(require("../methods/separeWorks"));
-var saveWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.saveWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const work = new Work_models_1.default();
     for (let i in req.body) {
         if (i == "category") {
@@ -70,8 +70,7 @@ var saveWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.saveWork = saveWork;
-var getQuantityPages = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getQuantityPages = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var works = [];
     if (req.params.category) {
         works = yield Work_models_1.default.find({ category: req.params.category });
@@ -92,8 +91,7 @@ var getQuantityPages = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
     res.json(contador);
 });
-exports.getQuantityPages = getQuantityPages;
-var getQuantityPagesCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getQuantityPagesCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var category = req.params.category;
     console.log(category);
     if (category) {
@@ -122,16 +120,13 @@ var getQuantityPagesCategory = (req, res) => __awaiter(void 0, void 0, void 0, f
         });
     }
 });
-exports.getQuantityPagesCategory = getQuantityPagesCategory;
-var getWorks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getWorks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const worksTotal = yield Work_models_1.default.find();
     const works = yield separeWorks_1.default(worksTotal, parseInt(req.params.page));
     res.json(works);
 });
-exports.getWorks = getWorks;
-var getWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () { return res.json(yield Work_models_1.default.findById(req.params.id)); });
-exports.getWork = getWork;
-var updateWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () { return res.json(yield Work_models_1.default.findById(req.params.id)); });
+exports.updateWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const work = yield Work_models_1.default.findById(req.params.id);
     if (work) {
         const token = req.headers["x-access-token"];
@@ -187,8 +182,7 @@ var updateWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.updateWork = updateWork;
-var deleteWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const work = yield Work_models_1.default.findById(req.params.id);
     if (work) {
         const token = req.headers["x-access-token"];
@@ -218,8 +212,7 @@ var deleteWork = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.deleteWork = deleteWork;
-var getWorksCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getWorksCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var categories = req.params.categories;
     const page = parseInt(req.params.page);
     categories = categories.split("-");
@@ -249,8 +242,7 @@ var getWorksCategory = (req, res) => __awaiter(void 0, void 0, void 0, function*
         error: "No se pudo separar los trabajos"
     });
 });
-exports.getWorksCategory = getWorksCategory;
-var getWorksUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getWorksUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var id;
     if (req.params.id) {
         id = req.params.id;
@@ -272,6 +264,4 @@ var getWorksUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         });
     }
 });
-exports.getWorksUser = getWorksUser;
-var getCategories = (req, res) => __awaiter(void 0, void 0, void 0, function* () { return res.json(yield Categories_models_1.default.find()); });
-exports.getCategories = getCategories;
+exports.getCategories = (req, res) => __awaiter(void 0, void 0, void 0, function* () { return res.json(yield Categories_models_1.default.find()); });

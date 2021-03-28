@@ -1,0 +1,19 @@
+#content {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+h1 {
+    margin: 30px;
+}
+
+#admins {
+    width: 600px; 
+}
+
+.admin {
+    width: calc(100% - 40px);
+    padding: 20px; 
+    border: 1px solid #ccc;
+}

@@ -12,13 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addCategorie = exports.deleteAdmin = exports.adminUpdatePassword = exports.adminUpdateEmail = exports.login = exports.saveAdmin = void 0;
+exports.addCategorie = exports.deleteAdmin = exports.adminUpdatePassword = exports.adminUpdateEmail = exports.login = exports.getAdmins = exports.saveAdmin = void 0;
 const Admin_models_1 = __importDefault(require("../models/Admin.models"));
 const comparePassword_methods_1 = __importDefault(require("../methods/comparePassword.methods"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const encryptPassword_methods_1 = __importDefault(require("../methods/encryptPassword.methods"));
 const Categories_models_1 = __importDefault(require("../models/Categories.models"));
-var saveAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.saveAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     if (email && password) {
         const admin = new Admin_models_1.default();
@@ -40,8 +40,8 @@ var saveAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.saveAdmin = saveAdmin;
-var login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getAdmins = (req, res) => __awaiter(void 0, void 0, void 0, function* () { return res.json(yield Admin_models_1.default.find()); });
+exports.login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     if (email && password) {
         const admin = yield Admin_models_1.default.findOne({ email });
@@ -78,8 +78,7 @@ var login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.login = login;
-var adminUpdateEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.adminUpdateEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { postEmail, email } = req.body;
     if (postEmail && email) {
         const { admin } = req.body;
@@ -99,8 +98,7 @@ var adminUpdateEmail = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
 });
-exports.adminUpdateEmail = adminUpdateEmail;
-var adminUpdatePassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.adminUpdatePassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { postPassword, password } = req.body;
     if (postPassword && password) {
         const { admin } = req.body;
@@ -120,13 +118,11 @@ var adminUpdatePassword = (req, res) => __awaiter(void 0, void 0, void 0, functi
         });
     }
 });
-exports.adminUpdatePassword = adminUpdatePassword;
-var deleteAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const adminDelete = yield Admin_models_1.default.findByIdAndRemove(req.params.id);
     res.json(adminDelete);
 });
-exports.deleteAdmin = deleteAdmin;
-var addCategorie = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.addCategorie = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { category } = req.body;
     if (category) {
         const categorie = new Categories_models_1.default();
@@ -147,4 +143,3 @@ var addCategorie = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         });
     }
 });
-exports.addCategorie = addCategorie;

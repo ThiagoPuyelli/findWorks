@@ -1,0 +1,12 @@
+<div id="content">
+    <h1>Save Admin</h1>
+    <form id="formAdmin" (submit)="submitAdmin()" [formGroup]="dataForm">
+        <label>Email</label>
+        <input type="email" id="email" formControlName="email" (change)="changeInput('email')" placeholder="Email">
+        <span class="msgError email">Email is required</span>
+        <label>Password</label>
+        <input type="password" id="password" formControlName="password" (change)="changeInput('password')" placeholder="Password">
+        <span class="msgError password">Password is required</span>
+        <button type="submit">Submit</button>
+    </form>
+</div>
