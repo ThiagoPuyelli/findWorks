@@ -1,7 +1,11 @@
 <div id="users">
-    <div class="user" *ngFor="let i of users" [routerLink]="['/profile/' + i._id]">
-        <img src="{{i.image}}" alt="">
-        <p id="name">{{i.name + " " + i.lastname}}</p>
-        <p id="email">{{i.email}}</p>
+    <h1>List Users</h1>
+    <div class="userBox" *ngFor="let i of users" [routerLink]="['/profile/' + i._id]">
+        <div class="user">
+            <img src="{{i.image}}" alt="">
+            <p id="name">{{i.name + " " + i.lastname}}</p>
+            <p id="email">{{i.email}}</p>
+        </div>
+        <button id="delete" (click)="deleteUser()">D</button>
     </div>
 </div>

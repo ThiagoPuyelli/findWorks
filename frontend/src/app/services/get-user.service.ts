@@ -40,4 +40,14 @@ export class GetUserService {
     }
   }
 
+  deleteUser(){
+    const token: string|null = sessionStorage.getItem("x-access-token");
+    if(token && token.split("|")[0] == "1"){
+        const headers: HttpHeaders = new HttpHeaders().set("x-access-token", token);
+        return this.http.delete(environment.uri + "/admin-users", {headers});
+    } else {
+      return undefined
+    }
+  }
+
 }
