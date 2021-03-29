@@ -16,6 +16,7 @@ export class UpdateUserComponent implements OnInit {
   public imageFile: File | undefined;
   public userID: string = "";
   public user: any;
+  public routeAdmin: boolean = false;
 
   constructor(
     private builder: FormBuilder,
@@ -34,7 +35,15 @@ export class UpdateUserComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.findUser();
+    this.route.url.subscribe(
+      (result: any) => {
+        if(result[0] == "update-user"){
+          this.findUser();
+          this.routeAdmin = true;
+        }
+      },
+      err => console.log(err)
+    )
   }
 
   findUser(){
