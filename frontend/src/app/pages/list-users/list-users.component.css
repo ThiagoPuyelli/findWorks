@@ -13,6 +13,7 @@ h1 {
 .userBox{
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
     height: 180px;
 }
 
@@ -41,10 +42,9 @@ h1 {
     width: 200px;
 }
 
-#delete {
+.button {
     height: 100%;
     width: 50px;
-    background-color: rgb(243, 39, 39);
     color: white;
     border: none;
     font-size: 20px;
@@ -53,6 +53,18 @@ h1 {
     transition: 300ms all;
 }
 
+#delete {
+    background-color: rgb(243, 39, 39);
+}
+
 #delete:hover {
     background-color: rgb(194, 6, 6);
+}
+
+#update {
+    background-color: var(--green);
+}
+
+#update:hover {
+    background-color: rgb(3, 95, 95);
 }

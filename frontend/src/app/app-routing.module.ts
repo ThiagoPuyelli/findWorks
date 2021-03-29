@@ -17,6 +17,7 @@ import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
 import { ListAdminsComponent } from './pages/list-admins/list-admins.component';
 import { ListUsersComponent } from './pages/list-users/list-users.component';
 import { SaveUserComponent } from './pages/save-user/save-user.component';
+import { UpdateUserComponent } from './pages/update-user/update-user.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
@@ -35,7 +36,8 @@ const routes: Routes = [
   { path: "login-admin", component: LoginAdminComponent, canActivate: [NoAuthGuard], canLoad: [NoAuthGuard]},
   { path: "list-admins", component: ListAdminsComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
   { path: "list-users", component: ListUsersComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
-  { path: "save-admin", component: SaveUserComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]}
+  { path: "save-admin", component: SaveUserComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
+  { path: "update-user/:id", component: UpdateUserComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]}
 ];
 
 @NgModule({

@@ -23,6 +23,7 @@ import { HomeAdminComponent } from './components/home-admin/home-admin.component
 import { ListUsersComponent } from './pages/list-users/list-users.component';
 import { ListAdminsComponent } from './pages/list-admins/list-admins.component';
 import { SaveUserComponent } from './pages/save-user/save-user.component';
+import { UpdateUserComponent } from './pages/update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SaveUserComponent } from './pages/save-user/save-user.component';
     HomeAdminComponent,
     ListUsersComponent,
     ListAdminsComponent,
-    SaveUserComponent
+    SaveUserComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,

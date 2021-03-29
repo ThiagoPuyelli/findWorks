@@ -6,6 +6,7 @@
             <p id="name">{{i.name + " " + i.lastname}}</p>
             <p id="email">{{i.email}}</p>
         </div>
-        <button id="delete" (click)="deleteUser()">D</button>
+        <button id="delete" class="button" (click)="deleteUser()">D</button>
+        <button id="update" class="button" [routerLink]="['/update-user/' + i._id]">U</button>
     </div>
 </div>
