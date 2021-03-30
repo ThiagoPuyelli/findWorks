@@ -18,4 +18,6 @@ router.put("/admin-email", verifyTokenAdmin_1.default, admin_controllers_1.admin
 router.put("/admin-password", verifyTokenAdmin_1.default, admin_controllers_1.adminUpdatePassword);
 router.post("/categories", verifyTokenAdmin_1.default, admin_controllers_1.addCategorie);
 router.get("/admin/auth", verifyTokenAdmin_1.default, (req, res) => res.json({ auth: true }));
+router.delete("/admin/:id", verifyTokenAdmin_1.default, admin_controllers_1.deleteAdmin);
+router.get("/admin/:id", verifyTokenAdmin_1.default, admin_controllers_1.getAdmin);
 exports.default = router;

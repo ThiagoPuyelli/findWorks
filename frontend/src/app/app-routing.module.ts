@@ -18,6 +18,8 @@ import { ListAdminsComponent } from './pages/list-admins/list-admins.component';
 import { ListUsersComponent } from './pages/list-users/list-users.component';
 import { SaveUserComponent } from './pages/save-user/save-user.component';
 import { UpdateUserComponent } from './pages/update-user/update-user.component';
+import { UpdateAdminComponent } from './pages/update-admin/update-admin.component';
+import { UpdateButtonsAdminComponent } from './pages/update-buttons-admin/update-buttons-admin.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
@@ -37,7 +39,9 @@ const routes: Routes = [
   { path: "list-admins", component: ListAdminsComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
   { path: "list-users", component: ListUsersComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
   { path: "save-admin", component: SaveUserComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
-  { path: "update-user/:id", component: UpdateUserComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]}
+  { path: "update-user/:id", component: UpdateUserComponent, canActivate: [AuthGuard], canLoad: [AuthGuard]},
+  { path: "update-admin/:data/:id", component: UpdateAdminComponent, canActivate: [AuthGuard], canLoad: [AuthGuard] },
+  { path: "update-buttons-admin/:id", component: UpdateButtonsAdminComponent, canActivate: [AuthGuard], canLoad: [AuthGuard] }
 ];
 
 @NgModule({

@@ -1,8 +1,12 @@
 <div id="content">
     <h1>List Admins</h1>
     <div id="admins">
-        <div class="admin" *ngFor="let i of admins">
-            <p><b>Email: </b>{{i.email}}</p>
+        <div class="adminBox" *ngFor="let i of admins">
+            <div class="admin">
+                <p><b>Email: </b>{{i.email}}</p>
+            </div>
+            <button class="button" id="delete" (click)="deleteAdmin(i._id)">D</button>
+            <button class="button" id="update" [routerLink]="['/update-buttons-admin/' + i._id]">U</button>
         </div>
     </div>
 </div>

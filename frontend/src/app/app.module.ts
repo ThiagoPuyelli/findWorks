@@ -24,6 +24,10 @@ import { ListUsersComponent } from './pages/list-users/list-users.component';
 import { ListAdminsComponent } from './pages/list-admins/list-admins.component';
 import { SaveUserComponent } from './pages/save-user/save-user.component';
 import { UpdateUserComponent } from './pages/update-user/update-user.component';
+import { UpdateAdminComponent } from './pages/update-admin/update-admin.component';
+import { UpdateButtonsAdminComponent } from './pages/update-buttons-admin/update-buttons-admin.component';
+import { UpdateEmailAdminComponent } from './components/update-email-admin/update-email-admin.component';
+import { UpdatePasswordAdminComponent } from './components/update-password-admin/update-password-admin.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,11 @@ import { UpdateUserComponent } from './pages/update-user/update-user.component';
     ListUsersComponent,
     ListAdminsComponent,
     SaveUserComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    UpdateAdminComponent,
+    UpdateButtonsAdminComponent,
+    UpdateEmailAdminComponent,
+    UpdatePasswordAdminComponent
   ],
   imports: [
     BrowserModule,

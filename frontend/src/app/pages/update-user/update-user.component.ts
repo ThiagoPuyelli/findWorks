@@ -100,17 +100,26 @@ export class UpdateUserComponent implements OnInit {
           userSend = formData;
         }
 
-        this.registerService.registerUser(userSend).subscribe(
-          (result: any) => {
-            if(result.auth){
-              sessionStorage.setItem("x-access-token", result.token);
-              location.reload();
+        if(this.routeAdmin){
+          this.registerService.updateUser(userSend, this.userID).subscribe(
+            result => {
+              
             }
-          },
-          err => {
-            console.log(err);
-          }
-        )
+          )
+        } else {
+          this.registerService.registerUser(userSend).subscribe(
+            (result: any) => {
+              if(result.auth){
+                sessionStorage.setItem("x-access-token", result.token);
+                location.reload();
+              }
+            },
+            err => {
+              console.log(err);
+            }
+          )
+        }
+
       } 
     } else {
       for(let i in this.dataForm.value){

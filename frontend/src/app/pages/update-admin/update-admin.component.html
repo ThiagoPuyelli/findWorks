@@ -1,0 +1,10 @@
+<div id="content">
+    <h1 id="title">Modificar Admin</h1>
+    <div id="emailBox" *ngIf="data == 'email'">
+        <label>Email</label>
+        <input type="email" value="{{dataEmail.value}}" readonly=readonly>
+        <label>New email</label>
+        <input type="email" (change)="changeInput($event, 'email')" value="{{dataEmail.value}}" placeholder="New email">
+    </div>
+</div>
+

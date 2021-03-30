@@ -26,4 +26,11 @@ export class ListAdminsComponent implements OnInit {
     )
   }
 
+  deleteAdmin(id: string){
+    this.getUserService.deleteAdmin(id).subscribe(
+      result => location.reload(),
+      err => console.log(err)
+    )
+  }
+
 }
