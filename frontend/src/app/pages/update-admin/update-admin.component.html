@@ -1,10 +1,12 @@
 <div id="content">
     <h1 id="title">Modificar Admin</h1>
-    <div id="emailBox" *ngIf="data == 'email'">
+    <form id="emailForm" (submit)="sendData()" *ngIf="data == 'email'">
         <label>Email</label>
-        <input type="email" value="{{dataEmail.value}}" readonly=readonly>
+        <input type="email" value="{{postEmail}}" readonly=readonly>
         <label>New email</label>
-        <input type="email" (change)="changeInput($event, 'email')" value="{{dataEmail.value}}" placeholder="New email">
-    </div>
+        <input type="email" (change)="changeInputEmail()" id="emailInput" value="{{dataEmail.value}}" placeholder="New email">
+        <span class="msgError">New Email is required</span>
+        <button type="submit">Submit</button>
+    </form>
 </div>
 

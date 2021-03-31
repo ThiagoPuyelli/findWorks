@@ -86,7 +86,7 @@ exports.login = login;
 var adminUpdateEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { postEmail, email } = req.body;
     if (postEmail && email) {
-        const { admin } = req.body;
+        const admin = yield Admin_models_1.default.findById(req.params.id);
         if (postEmail == admin.email) {
             admin.email = email;
             res.json(yield Admin_models_1.default.findByIdAndUpdate(admin._id, admin, { new: true }));

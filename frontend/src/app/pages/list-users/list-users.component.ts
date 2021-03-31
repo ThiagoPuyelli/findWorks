@@ -26,8 +26,8 @@ export class ListUsersComponent implements OnInit {
     )
   }
 
-  deleteUser(){
-    this.getUser.deleteUser()?.subscribe(
+  deleteUser(id: string){
+    this.getUser.deleteUser(id)?.subscribe(
       result => location.reload(),
       err => console.log(err)
     )

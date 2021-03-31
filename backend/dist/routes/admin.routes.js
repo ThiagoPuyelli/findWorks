@@ -14,7 +14,7 @@ router.get("/users", verifyTokenAdmin_1.default, user_controllers_1.getUsers);
 router.get("/admin", verifyTokenAdmin_1.default, admin_controllers_1.getAdmins);
 router.post("/admin", verifyTokenAdmin_1.default, admin_controllers_1.saveAdmin);
 router.post("/admin/login", admin_controllers_1.login);
-router.put("/admin-email", verifyTokenAdmin_1.default, admin_controllers_1.adminUpdateEmail);
+router.put("/admin-email/:id", verifyTokenAdmin_1.default, admin_controllers_1.adminUpdateEmail);
 router.put("/admin-password", verifyTokenAdmin_1.default, admin_controllers_1.adminUpdatePassword);
 router.post("/categories", verifyTokenAdmin_1.default, admin_controllers_1.addCategorie);
 router.get("/admin/auth", verifyTokenAdmin_1.default, (req, res) => res.json({ auth: true }));

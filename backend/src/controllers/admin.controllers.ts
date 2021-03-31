@@ -73,7 +73,7 @@ export var login = async (req: Request, res: Response) => {
 export var adminUpdateEmail = async (req: Request, res: Response) => {
     const { postEmail, email } = req.body;
    if(postEmail && email){
-       const { admin } = req.body;
+       const admin = await Admin.findById(req.params.id);
        if(postEmail == admin.email){
            admin.email = email;
            res.json(await Admin.findByIdAndUpdate(admin._id, admin, {new: true}));

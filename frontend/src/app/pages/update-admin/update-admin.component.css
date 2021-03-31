@@ -1,0 +1,56 @@
+#content {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+h1 {
+    margin: 30px;
+}
+
+#emailForm {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+label {
+    display: block;
+    font-size: 23px;
+    margin: 20px;
+    width: 300px;
+    text-align: center;
+    border-bottom: 2px solid var(--yellow);
+}
+
+input {
+    width: 280px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 4px #ccc;
+}
+
+button {
+    margin: 30px;
+    padding: 10px;
+    width: 300px;
+    border: none;
+    background-color: rgb(64, 209, 64);
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    transition: 300ms all;
+    font-size: 17px;
+}
+
+button:hover {
+    background-color: rgb(15, 155, 15);
+}
+
+.msgError {
+    display: none;
+    font-size: 17px;
+    color: red;
+    margin-top: 20px;
+    font-weight: bold;
+}
