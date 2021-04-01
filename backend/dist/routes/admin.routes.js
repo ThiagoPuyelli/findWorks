@@ -20,4 +20,5 @@ router.post("/categories", verifyTokenAdmin_1.default, admin_controllers_1.addCa
 router.get("/admin/auth", verifyTokenAdmin_1.default, (req, res) => res.json({ auth: true }));
 router.delete("/admin/:id", verifyTokenAdmin_1.default, admin_controllers_1.deleteAdmin);
 router.get("/admin/:id", verifyTokenAdmin_1.default, admin_controllers_1.getAdmin);
+router.put("/admin-password/:id", verifyTokenAdmin_1.default, admin_controllers_1.adminUpdatePasswordExtern);
 exports.default = router;

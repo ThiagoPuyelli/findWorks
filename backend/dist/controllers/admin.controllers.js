@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addCategorie = exports.deleteAdmin = exports.adminUpdatePassword = exports.adminUpdateEmail = exports.login = exports.getAdmin = exports.getAdmins = exports.saveAdmin = void 0;
+exports.addCategorie = exports.deleteAdmin = exports.adminUpdatePasswordExtern = exports.adminUpdatePassword = exports.adminUpdateEmail = exports.login = exports.getAdmin = exports.getAdmins = exports.saveAdmin = void 0;
 const Admin_models_1 = __importDefault(require("../models/Admin.models"));
 const comparePassword_methods_1 = __importDefault(require("../methods/comparePassword.methods"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -125,6 +125,22 @@ var adminUpdatePassword = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.adminUpdatePassword = adminUpdatePassword;
+var adminUpdatePasswordExtern = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { password } = req.body;
+    if (password) {
+        const admin = yield Admin_models_1.default.findById(req.params.id);
+        if (admin) {
+            admin.password = yield encryptPassword_methods_1.default(password);
+            const adminUpdate = yield Admin_models_1.default.findByIdAndUpdate(admin._id, admin, { new: true });
+            res.json(adminUpdate);
+        }
+        else
+            res.json({ error: "El admin no existe" });
+    }
+    else
+        res.json({ error: "La contraseña no es válida" });
+});
+exports.adminUpdatePasswordExtern = adminUpdatePasswordExtern;
 var deleteAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const adminDelete = yield Admin_models_1.default.findByIdAndRemove(req.params.id);
     res.json(adminDelete);

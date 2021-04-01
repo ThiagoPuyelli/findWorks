@@ -1,11 +1,18 @@
 <div id="content">
     <h1 id="title">Modificar Admin</h1>
-    <form id="emailForm" (submit)="sendData()" *ngIf="data == 'email'">
+    <form id="emailForm" (submit)="sendDataEmail()" *ngIf="data == 'email'">
         <label>Email</label>
         <input type="email" value="{{postEmail}}" readonly=readonly>
         <label>New email</label>
         <input type="email" (change)="changeInputEmail()" id="emailInput" value="{{dataEmail.value}}" placeholder="New email">
         <span class="msgError">New Email is required</span>
+        <button type="submit">Submit</button>
+    </form>
+    <form id="passwordForm" *ngIf="data == 'password'">
+        <label>New Password</label>
+        <input type="password" id="password" (change)="changeInputPassword('password')" placeholder="Password">
+        <input type="password" id="confirmPassword" (change)="changeInputPassword('confirmPassword')" placeholder="Confirm Password">
+        <span class="msgError">Password is required</span>
         <button type="submit">Submit</button>
     </form>
 </div>

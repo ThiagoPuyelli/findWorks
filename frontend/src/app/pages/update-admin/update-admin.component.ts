@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetUserService } from "../../services/get-user.service";
 import { ActivatedRoute } from "@angular/router";
-import { Validators, FormControl } from "@angular/forms";
+import { Validators, FormControl, FormGroup, AbstractControl } from "@angular/forms";
 import { ModifyAdminService } from "../../services/modify-admin.service";
 import { Router } from "@angular/router";
 
@@ -13,9 +13,11 @@ import { Router } from "@angular/router";
 export class UpdateAdminComponent implements OnInit {
 
   public dataEmail: FormControl = new FormControl("", [Validators.required, Validators.email]);
-  public dataPassword: FormControl = new FormControl("", [Validators.required, Validators.minLength(4)]);
+  public dataPassword: FormGroup = new FormGroup({
+    password: new FormControl("", [Validators.required, Validators.minLength(4)]),
+    confirmPassword: new FormControl("", [Validators.required, Validators.minLength(4)])
+  });
   public postEmail: string = "";
-  public postPassword: string = "";
   public data: string = "";
   public userID: string = "";
 
@@ -63,7 +65,24 @@ export class UpdateAdminComponent implements OnInit {
     }
   }
 
-  sendData(){
+  changeInputPassword(id: string){
+    let passwordInput: any = document.querySelector("#" + id);
+    console.log(this.dataPassword.get(id))
+    const password: AbstractControl|null = this.dataPassword.get(id);
+    if(password) password.setValue(passwordInput.value);
+    let msgError: HTMLElement|null = document.querySelector(".msgError");
+    if(password && password.status == "INVALID" && passwordInput && msgError){
+      passwordInput.style.border = "1px solid red";
+      passwordInput.style.boxShadow = "0px 0px 3px red";
+      msgError.style.display = "block";
+    } else if(password && password.status == "VALID" && passwordInput && msgError){
+      passwordInput.style.border = "1px solid lightgreen";
+      passwordInput.style.boxShadow = "0px 0px 3px lightgreen";
+      msgError.style.display = "none";
+    }
+  }
+
+  sendDataEmail(){
     if(this.dataEmail.status == "VALID"){
       this.modifyAdmin.updateEmail({
         email: this.dataEmail.value,

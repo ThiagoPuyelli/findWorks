@@ -108,6 +108,18 @@ export var adminUpdatePassword = async (req: Request, res: Response) => {
     }
 }
 
+export var adminUpdatePasswordExtern = async(req: Request, res: Response) => {
+    const { password } = req.body;
+    if(password){
+        const admin = await Admin.findById(req.params.id);
+        if(admin){
+            admin.password = await encp(password);
+            const adminUpdate = await Admin.findByIdAndUpdate(admin._id, admin, {new: true});
+            res.json(adminUpdate);
+        } else res.json({error: "El admin no existe"});
+    } else res.json({error: "La contraseña no es válida"});
+}
+
 export var deleteAdmin = async (req: Request, res: Response) => {
     const adminDelete = await Admin.findByIdAndRemove(req.params.id);
     res.json(adminDelete);
