@@ -21,4 +21,5 @@ router.get("/admin/auth", verifyTokenAdmin_1.default, (req, res) => res.json({ a
 router.delete("/admin/:id", verifyTokenAdmin_1.default, admin_controllers_1.deleteAdmin);
 router.get("/admin/:id", verifyTokenAdmin_1.default, admin_controllers_1.getAdmin);
 router.put("/admin-password/:id", verifyTokenAdmin_1.default, admin_controllers_1.adminUpdatePasswordExtern);
+router.put("/admin-password-user/:id", verifyTokenAdmin_1.default, user_controllers_1.updatePasswordUser);
 exports.default = router;

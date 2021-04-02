@@ -41,8 +41,27 @@ export class RegisterService {
       const headers: HttpHeaders = new HttpHeaders().set("x-access-token", token);
       return this.http.put(environment.uri + "/users", body, {headers});
     } else {
-      console.log("hola")
       return this.http.put(environment.uri + "/users", body);
+    }
+  }
+
+  updatePasswordUserOwner(body: any) {
+    const token: string|null = sessionStorage.getItem("x-access-token");
+    if(token){
+      const headers: HttpHeaders = new HttpHeaders().set("x-access-token", token);
+      return this.http.put(environment.uri + "/users-password", body, {headers});
+    } else {
+      return this.http.put(environment.uri + "/users-password", body);
+    }
+  }
+
+  adminUpdatePasswordUser(body: any, id: string) {
+    const token: string|null = sessionStorage.getItem("x-access-token");
+    if(token && token.split("|")[0] == "1"){
+      const headers: HttpHeaders = new HttpHeaders().set("x-access-token", token);
+      return this.http.put(environment.uri + "/admin-password-user/" + id, body, {headers});
+    } else {
+      return this.http.put(environment.uri + "/admin-password-user/" + id, body);
     }
   }
 

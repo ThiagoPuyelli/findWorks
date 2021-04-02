@@ -203,3 +203,37 @@ export var updateUser = async (req: Request, res: Response) => {
 }
 
 export var verifyToken = (req: Request, res: Response) => res.json({auth: true});
+
+export var updatePasswordUser = async (req: Request, res: Response) => {
+    const { password } = req.body;
+    if(password && password != ""){
+        var userID: string;
+        if(req.params.id) {
+            userID = req.params.id;
+        } else {
+            const token: string|string[]|undefined = req.headers["x-access-token"];
+            if(token && typeof token == "string" && token.split("|")[0] == "0"){
+                userID = token.split("|")[2];
+            } else {
+                userID = "pepe";
+                res.json({
+                    error: "El token no es válido"
+                })
+            }
+        }
+        const user = await User.findById(userID);
+        if(user){
+            user.password = await encyp(password);
+            console.log(user.password)
+            res.json(await User.findByIdAndUpdate(user._id, user, {new: true}));
+        } else {
+            res.json({
+                error: "El usuario no es válido"
+            });
+        }
+    } else {
+        res.json({
+            error: "La contraseña no es válida"
+        })
+    }
+}

@@ -14,6 +14,7 @@ router.post("/users/login", user_controllers_1.login);
 router.get("/users/:id", user_controllers_1.getUser);
 router.delete("/users", verifyTokenUser_1.default, user_controllers_1.deleteUser);
 router.put("/users", verifyTokenUser_1.default, multer_middlewares_1.default.single("image"), user_controllers_1.updateUser);
+router.put("/users-password", user_controllers_1.verifyToken, user_controllers_1.updatePasswordUser);
 router.get("/auth", verifyTokenUser_1.default, user_controllers_1.verifyToken);
 router.put("/consults/:id/:workID", consult_controllers_1.saveConsult);
 router.get("/consults", verifyTokenUser_1.default, consult_controllers_1.getConsults);

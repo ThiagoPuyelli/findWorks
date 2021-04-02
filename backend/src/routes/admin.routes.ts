@@ -1,6 +1,6 @@
 import { Router } from "express";
 const router = Router();
-import { updateUser, deleteUser, getUsers } from "../controllers/user.controllers";
+import { updateUser, deleteUser, getUsers, updatePasswordUser } from "../controllers/user.controllers";
 import { saveAdmin, login, adminUpdateEmail, adminUpdatePassword, addCategorie, getAdmins, deleteAdmin, getAdmin, adminUpdatePasswordExtern } from "../controllers/admin.controllers";
 import verifyTokenAdmin from "../middlewares/verifyTokenAdmin";
 
@@ -17,5 +17,6 @@ router.get("/admin/auth", verifyTokenAdmin, (req, res) => res.json({auth: true})
 router.delete("/admin/:id", verifyTokenAdmin, deleteAdmin);
 router.get("/admin/:id", verifyTokenAdmin, getAdmin);
 router.put("/admin-password/:id", verifyTokenAdmin, adminUpdatePasswordExtern);
+router.put("/admin-password-user/:id", verifyTokenAdmin, updatePasswordUser);
 
 export default router;
