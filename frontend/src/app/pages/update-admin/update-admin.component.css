@@ -54,3 +54,13 @@ button:hover {
     margin-top: 20px;
     font-weight: bold;
 }
+
+#passwordForm {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+#passwordForm input{
+    margin-top: 20px;
+}

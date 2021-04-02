@@ -8,11 +8,12 @@
         <span class="msgError">New Email is required</span>
         <button type="submit">Submit</button>
     </form>
-    <form id="passwordForm" *ngIf="data == 'password'">
+    <form id="passwordForm" (submit)="sendDataPassword()" *ngIf="data == 'password'">
         <label>New Password</label>
         <input type="password" id="password" (change)="changeInputPassword('password')" placeholder="Password">
         <input type="password" id="confirmPassword" (change)="changeInputPassword('confirmPassword')" placeholder="Confirm Password">
-        <span class="msgError">Password is required</span>
+        <span class="msgError required">Password is required</span>
+        <span class="msgError different">Passwords its differents</span>
         <button type="submit">Submit</button>
     </form>
 </div>

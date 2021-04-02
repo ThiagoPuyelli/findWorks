@@ -12,7 +12,8 @@ export class ProfileComponent implements OnInit {
 
   public user: any;
   public owner: boolean = false;
-
+  public admin: boolean = false;
+  
   constructor(
     private route: ActivatedRoute,
     private getUserService: GetUserService
@@ -31,6 +32,9 @@ export class ProfileComponent implements OnInit {
             const idUser: string = token.split("|")[2];
             if(idUser == result.id){
               this.owner = true;
+            }
+            if(token && token.split("|")[0] == "1"){
+              this.admin = true;
             }
           }
 

@@ -1,34 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../models/User";
 import { RegisterService } from "../../services/register.service";
 import { GetUserService } from "../../services/get-user.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.component.html',
   styleUrls: ['./update-user.component.css']
 })
-export class UpdateUserComponent implements OnInit {
+export class UpdateUserComponent implements OnInit, AfterContentChecked {
 
   public dataForm: FormGroup;
   public imageFile: File | undefined;
   public userID: string = "";
   public user: any;
   public routeAdmin: boolean = false;
+  public owner: boolean = false;
 
   constructor(
     private builder: FormBuilder,
     private registerService: RegisterService,
     private getUserService: GetUserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.dataForm = this.builder.group({
       name: ["", Validators.required],
       lastname: ["", Validators.required],
       email: ["", [Validators.email, Validators.required]],
-      password: ["", Validators.minLength(4)],
       description: ["", Validators.required]
     })
     this.imageFile = undefined;
@@ -46,10 +47,19 @@ export class UpdateUserComponent implements OnInit {
     )
   }
 
+  ngAfterContentChecked(): void {
+    const token: string|null = sessionStorage.getItem("x-access-token");
+    if(token && token.split("|")[0] == "0" && token.split("|")[2] == this.userID){
+        this.owner = true;
+    }
+  }
+
   findUser(){
     this.route.params.subscribe(
       (params: any) => {
-        this.userID = params.id;
+        if(params.id){
+          this.userID = params.id;
+        }
         this.getUserService.findUserPublic(this.userID).subscribe(
           result =>{ 
             this.user = result;
@@ -101,11 +111,18 @@ export class UpdateUserComponent implements OnInit {
         }
 
         if(this.routeAdmin){
-          this.registerService.updateUser(userSend, this.userID).subscribe(
-            result => {
-              
-            }
-          )
+          if(this.owner){
+            console.log(userSend)
+            this.registerService.updateUserOwner(userSend).subscribe(
+              result => this.router.navigate(["/profile/" + this.userID]),
+              err => console.log(err)
+            )
+          } else {
+            this.registerService.updateUser(userSend, this.userID).subscribe(
+              result => this.router.navigate(["/profile/" + this.userID]),
+              err => console.log(err)
+            )
+          }
         } else {
           this.registerService.registerUser(userSend).subscribe(
             (result: any) => {

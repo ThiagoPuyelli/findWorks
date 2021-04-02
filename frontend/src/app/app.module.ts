@@ -28,6 +28,7 @@ import { UpdateAdminComponent } from './pages/update-admin/update-admin.componen
 import { UpdateButtonsAdminComponent } from './pages/update-buttons-admin/update-buttons-admin.component';
 import { UpdateEmailAdminComponent } from './components/update-email-admin/update-email-admin.component';
 import { UpdatePasswordAdminComponent } from './components/update-password-admin/update-password-admin.component';
+import { UpdatePasswordUserComponent } from './pages/update-password-user/update-password-user.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { UpdatePasswordAdminComponent } from './components/update-password-admin
     UpdateAdminComponent,
     UpdateButtonsAdminComponent,
     UpdateEmailAdminComponent,
-    UpdatePasswordAdminComponent
+    UpdatePasswordAdminComponent,
+    UpdatePasswordUserComponent
   ],
   imports: [
     BrowserModule,

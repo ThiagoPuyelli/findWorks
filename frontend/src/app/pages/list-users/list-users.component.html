@@ -8,5 +8,6 @@
         </div>
         <button id="delete" class="button" (click)="deleteUser(i._id)">D</button>
         <button id="update" class="button" [routerLink]="['/update-user/' + i._id]">U</button>
+        <button id="password" class="button" [routerLink]="['/update-password-user/' + i._id]">P</button>
     </div>
 </div>

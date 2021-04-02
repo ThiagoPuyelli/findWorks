@@ -68,9 +68,11 @@ export class UpdateAdminComponent implements OnInit {
   changeInputPassword(id: string){
     let passwordInput: any = document.querySelector("#" + id);
     console.log(this.dataPassword.get(id))
-    const password: AbstractControl|null = this.dataPassword.get(id);
-    if(password) password.setValue(passwordInput.value);
-    let msgError: HTMLElement|null = document.querySelector(".msgError");
+    const password: AbstractControl|null = this.dataPassword.get("password");
+    const confirmPassword: AbstractControl|null = this.dataPassword.get("confirmPassword");
+    this.dataPassword.get(id)?.setValue(passwordInput.value);
+    let msgError: HTMLElement|null = document.querySelector(".msgError.required");
+
     if(password && password.status == "INVALID" && passwordInput && msgError){
       passwordInput.style.border = "1px solid red";
       passwordInput.style.boxShadow = "0px 0px 3px red";
@@ -79,6 +81,14 @@ export class UpdateAdminComponent implements OnInit {
       passwordInput.style.border = "1px solid lightgreen";
       passwordInput.style.boxShadow = "0px 0px 3px lightgreen";
       msgError.style.display = "none";
+    }
+
+    console.log(password, confirmPassword)
+    let differentError: HTMLElement|null = document.querySelector(".msgError.different");
+    if(password && confirmPassword && password.value == confirmPassword.value){
+      if(differentError) differentError.style.display = "none";
+    } else {
+      if(differentError) differentError.style.display = "block";
     }
   }
 
@@ -94,6 +104,17 @@ export class UpdateAdminComponent implements OnInit {
     } else {
       console.log(typeof this.dataEmail.value)
       this.changeInputEmail();
+    }
+  }
+
+  sendDataPassword(){
+    const password: string|null = this.dataPassword.get("password")?.value;
+    const confirmPassword: string|null = this.dataPassword.get("confirmPassword")?.value;
+    if(this.dataPassword.status == "VALID" && password == confirmPassword){
+        this.modifyAdmin.updatePassword({password}, this.userID).subscribe(
+          result => this.router.navigate(["/list-admins"]),
+          err => console.log(err)
+        )
     }
   }
 

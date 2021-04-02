@@ -163,7 +163,7 @@ export var updateUser = async (req: Request, res: Response) => {
         userToUpdate = await User.findById(req.params.id);
     } else {
         const userID: any = req.headers["x-access-token"];
-        userToUpdate = await User.findById(userID.split("|")[1]);
+        userToUpdate = await User.findById(userID.split("|")[2]);
     }
 
 

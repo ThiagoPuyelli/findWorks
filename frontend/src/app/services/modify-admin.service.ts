@@ -21,4 +21,14 @@ export class ModifyAdminService {
     }
   }
 
+  updatePassword(body: any, id: string) {
+    const token: string|null = sessionStorage.getItem("x-access-token");
+    if(token && token.split("|")[0] == "1"){
+      const headers: HttpHeaders = new HttpHeaders().set("x-access-token", token);
+      return this.http.put(environment.uri + "/admin-password/" + id, body, {headers});
+    } else {
+      return this.http.put(environment.uri + "/admin-password/" + id, body);
+    }
+  }
+
 }

@@ -6,7 +6,7 @@
         </div>
         <p id="description">{{user.description}}</p>
     </div>
-    <a id="linkModify" *ngIf="owner" [routerLink]="['/modify-profile/' + this.user._id]">Modify User</a>
+    <a id="linkModify" *ngIf="owner || admin" [routerLink]="['/update-user/' + this.user._id]">Modify User</a>
     <h1 id="titleWorks">Works</h1>
     <div id="works">
         <app-works id="{{user._id}}" user="true"></app-works>

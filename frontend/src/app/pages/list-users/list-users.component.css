@@ -69,3 +69,11 @@ h1 {
 #update:hover {
     background-color: rgb(3, 95, 95);
 }
+
+#password {
+    background-color: var(--black);
+}
+
+#password:hover {
+    background-color: rgb(31, 30, 30);
+}

@@ -177,7 +177,7 @@ var updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     else {
         const userID = req.headers["x-access-token"];
-        userToUpdate = yield User_models_1.default.findById(userID.split("|")[1]);
+        userToUpdate = yield User_models_1.default.findById(userID.split("|")[2]);
     }
     if (userToUpdate) {
         for (let i in req.body) {
