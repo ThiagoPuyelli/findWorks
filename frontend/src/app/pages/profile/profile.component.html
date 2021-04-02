@@ -6,7 +6,8 @@
         </div>
         <p id="description">{{user.description}}</p>
     </div>
-    <a id="linkModify" *ngIf="owner || admin" [routerLink]="['/update-user/' + this.user._id]">Modify User</a>
+    <a class="modifyButton"  id="linkModify" *ngIf="owner || admin" [routerLink]="['/update-user/' + this.user._id]">Modify User</a>
+    <a class="modifyButton" id="linkModifyPassword" *ngIf="owner || admin" [routerLink]="['/update-password-user/' + this.user._id]">Modify Password</a>
     <h1 id="titleWorks">Works</h1>
     <div id="works">
         <app-works id="{{user._id}}" user="true"></app-works>

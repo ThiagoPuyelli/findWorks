@@ -8,11 +8,13 @@ import { VerifyAuthService } from "./services/verify-auth.service";
 })
 export class AppComponent implements OnInit, AfterContentChecked{
   public auth: boolean;
+  public admin: boolean;
   public id: string|null|undefined;
   constructor(
     private verifyAuth: VerifyAuthService
     ){
       this.auth = false;
+      this.admin = false;
     };
     
     ngOnInit(): void {
@@ -22,6 +24,7 @@ export class AppComponent implements OnInit, AfterContentChecked{
     if(this.verifyAuth.auth) {
       this.auth = true;
       this.id = sessionStorage.getItem("x-access-token")?.split("|")[2];
+      if(sessionStorage.getItem("x-access-token")?.split("|")[0] == "1") this.admin = true;
     };
     }
 

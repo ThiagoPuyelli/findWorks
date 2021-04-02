@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { RegisterService } from "../../services/register.service"; 
 import { Router } from "@angular/router";
 
@@ -50,6 +50,31 @@ export class UpdatePasswordUserComponent implements OnInit {
           err => console.log(err)
         )
       }
+    } else if(this.dataForm.status == "VALID" && this.dataForm.value.password != this.dataForm.value.confirmPassword) {
+      let span: HTMLElement|null = document.querySelector(".msgError.different");
+      if(span)span.style.display = "block";
+    } else {
+      let span: HTMLElement|null = document.querySelector(".msgError.required");
+      if(span) span.style.display = "block";
+    }
+  }
+
+  changeInput(id: string){
+    const control: AbstractControl|null = this.dataForm.get(id);
+    var span: HTMLElement|null = document.querySelector(".msgError.required");
+    var input: HTMLElement|null = document.querySelector("#" + id + "Input");
+    if(control && control.status == "VALID"){
+        if(span) span.style.display = "none";
+        if(input) {
+          input.style.border = "1px solid green";
+          input.style.boxShadow = "0px 0px 3px green";
+        };
+    } else if(control && control.status == "INVALID"){
+        if(span) span.style.display = "block";
+        if(input) {
+          input.style.border = "1px solid red";
+          input.style.boxShadow = "0px 0px 3px red";
+        };
     }
   }
 

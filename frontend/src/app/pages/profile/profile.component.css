@@ -46,14 +46,13 @@
     text-decoration: underline;
 }
 
-#linkModify {
+.modifyButton {
     display: block;
     padding: 10px;
     width: 150px;
     margin: 0px auto;
     margin-top: 10px;
     text-align: center;
-    background-color: rgb(2, 192, 2);
     font-size: 20px;
     color: white;
     border-radius: 20px;
@@ -62,6 +61,20 @@
     text-decoration: none;
 }
 
+#linkModify {
+    background-color: rgb(2, 192, 2);
+}
+
 #linkModify:hover {
     background-color: green;    
 }
+
+#linkModifyPassword {
+    background-color: var(--black);
+    width: 300px;
+}
+
+#linkModifyPassword:hover {
+    background-color: rgb(31, 30, 30);
+}
+
