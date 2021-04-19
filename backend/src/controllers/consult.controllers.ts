@@ -4,6 +4,7 @@ import Work from "../models/Work.models";
 
 export var saveConsult = async (req: Request, res: Response) => {
     const userToConsult = await User.findById(req.params.id);
+    console.log(req.body)
 
     if(userToConsult){
         const work = await Work.findById(req.params.workID);
