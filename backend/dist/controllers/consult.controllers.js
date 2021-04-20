@@ -17,6 +17,7 @@ const User_models_1 = __importDefault(require("../models/User.models"));
 const Work_models_1 = __importDefault(require("../models/Work.models"));
 var saveConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userToConsult = yield User_models_1.default.findById(req.params.id);
+    console.log(req.body);
     if (userToConsult) {
         const work = yield Work_models_1.default.findById(req.params.workID);
         if (work) {

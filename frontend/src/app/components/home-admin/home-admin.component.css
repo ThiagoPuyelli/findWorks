@@ -25,6 +25,7 @@
     padding: 20px;
     cursor: pointer;
     transition: 300ms all;
+    margin: 20px;
 }
 
 .boxLink:hover {
